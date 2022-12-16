@@ -12,10 +12,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Stellaris',
-      theme: ThemeData(scaffoldBackgroundColor: const Color(0xFFFEFFDE),primarySwatch: Colors.green),
-      debugShowCheckedModeBanner: false,
-      home: const LoginPage()
-    );
+        title: 'Stellaris',
+        theme: ThemeData(
+          scaffoldBackgroundColor: const Color(0xFFFEFFDE),
+        ),
+        debugShowCheckedModeBanner: false,
+        home: const LoginPage());
   }
 }
