@@ -1,4 +1,4 @@
-part of 'pages.dart';
+part of '../pages.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
@@ -195,12 +195,12 @@ class _RegisterPageState extends State<RegisterPage> {
                                         foregroundColor:
                                             const Color(0XFF91C788)),
                                     onPressed: () {
-                                      // Navigator.pushAndRemoveUntil<dynamic>(
-                                      //     context,
-                                      //     MaterialPageRoute<dynamic>(
-                                      //         builder: (conrext) =>
-                                      //             const HomePage()),
-                                      //     (route) => false);
+                                      Navigator.pushAndRemoveUntil<dynamic>(
+                                          context,
+                                          MaterialPageRoute<dynamic>(
+                                              builder: (conrext) =>
+                                                  const MainMenuPage()),
+                                          (route) => false);
                                     },
                                     child: const Text('Continue'))
                               ],

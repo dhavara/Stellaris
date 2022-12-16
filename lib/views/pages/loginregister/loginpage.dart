@@ -1,4 +1,4 @@
-part of 'pages.dart';
+part of '../pages.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -156,12 +156,12 @@ class _LoginPageState extends State<LoginPage> {
                                         foregroundColor:
                                             const Color(0XFF91C788)),
                                     onPressed: () {
-                                      // Navigator.pushAndRemoveUntil<dynamic>(
-                                      //     context,
-                                      //     MaterialPageRoute<dynamic>(
-                                      //         builder: (conrext) =>
-                                      //             const HomePage()),
-                                      //     (route) => false);
+                                      Navigator.pushAndRemoveUntil<dynamic>(
+                                          context,
+                                          MaterialPageRoute<dynamic>(
+                                              builder: (conrext) =>
+                                                  const MainMenuPage()),
+                                          (route) => false);
                                     },
                                     child: const Text('Continue'))
                               ],
