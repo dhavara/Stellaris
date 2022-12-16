@@ -1,3 +1,4 @@
+import 'package:dietaryminder/views/pages/pages.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -12,36 +13,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Stellaris',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: const MyHomePage(title: 'Tester'),
-    );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-
-  final String title;
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
-      body: Center(
-        child: Column(
-        ),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+      theme: ThemeData(scaffoldBackgroundColor: const Color(0xFFFEFFDE),primarySwatch: Colors.green),
+      debugShowCheckedModeBanner: false,
+      home: const LoginPage()
     );
   }
 }
