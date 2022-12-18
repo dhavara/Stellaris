@@ -48,6 +48,8 @@ class _LoginPageState extends State<LoginPage> {
               "Please login to your account",
               style: TextStyle(fontSize: 16, color: Colors.grey),
             ),
+
+            //Code for Form (Email)
             const SizedBox(height: 16),
             Form(
               key: _loginKey,
@@ -89,6 +91,8 @@ class _LoginPageState extends State<LoginPage> {
                         : null;
                   },
                 ),
+
+                //Code for Form (Password)
                 const SizedBox(height: 16),
                 TextFormField(
                   obscureText: isHidden,
@@ -136,6 +140,8 @@ class _LoginPageState extends State<LoginPage> {
                         : null;
                   },
                 ),
+
+                //Code for Validate and Alert Dialog
                 const SizedBox(height: 16),
                 SizedBox(
                   width: double.infinity,
@@ -190,6 +196,8 @@ class _LoginPageState extends State<LoginPage> {
                       },
                       child: const Text("Login")),
                 ),
+
+                const SizedBox(height: 16),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [

@@ -50,6 +50,8 @@ class _RegisterPageState extends State<RegisterPage> {
               "Please fill in your data",
               style: TextStyle(fontSize: 16, color: Colors.grey),
             ),
+
+            //Code for Form (Name)
             const SizedBox(height: 16),
             Form(
               key: _registerKey,
@@ -91,6 +93,8 @@ class _RegisterPageState extends State<RegisterPage> {
                         : null;
                   },
                 ),
+
+                //Code for Form (Email)
                 const SizedBox(height: 16),
                 TextFormField(
                   keyboardType: TextInputType.emailAddress,
@@ -128,6 +132,8 @@ class _RegisterPageState extends State<RegisterPage> {
                         : null;
                   },
                 ),
+
+                //Code for Form (Password)
                 const SizedBox(height: 16),
                 TextFormField(
                   obscureText: isHidden,
@@ -175,6 +181,8 @@ class _RegisterPageState extends State<RegisterPage> {
                         : null;
                   },
                 ),
+
+                //Code for Validate and Alert Dialog
                 const SizedBox(height: 16),
                 SizedBox(
                   width: double.infinity,
@@ -229,6 +237,8 @@ class _RegisterPageState extends State<RegisterPage> {
                       },
                       child: const Text("Register")),
                 ),
+
+                const SizedBox(height: 16),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [

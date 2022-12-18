@@ -9,11 +9,12 @@ class MainMenuPage extends StatefulWidget {
 
 class _MainMenuPageState extends State<MainMenuPage> {
   int _selectedIndex = 0;
+  // ignore: prefer_final_fields
   static List<Widget> _widgetOptions = <Widget>[
-    HomePage(),
-    CalculatePage(),
-    FoodsPage(),
-    SchedulePage()
+    const HomePage(),
+    const CalculatePage(),
+    const FoodsPage(),
+    const SchedulePage()
   ];
 
   void _onItemTapped(int index) {
