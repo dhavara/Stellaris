@@ -17,6 +17,6 @@ class MyApp extends StatelessWidget {
           scaffoldBackgroundColor: const Color(0xFFFEFFDE),
         ),
         debugShowCheckedModeBanner: false,
-        home: const LoginPage());
+        home: const SchedulePage());
   }
 }
