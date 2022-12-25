@@ -161,6 +161,14 @@ class _SchedulePageState extends State<SchedulePage> {
                                       fontSize: 16, color: Colors.grey),
                                 )
                               ],
+                            ),
+                            Row(
+                              children: [
+                                Text(
+                                  "Calorie: ",
+                                  style: TextStyle(fontSize: 16),
+                                )
+                              ],
                             )
                           ],
                         ),
