@@ -1,121 +1,75 @@
 part of 'services.dart';
 
 class FatsecretService {
+  static Future<List<SearchFood>> searchFood(
+      String query, int pageNumber, AccessTokenResponse accessToken) async {
+    // if (accessToken.isExpired()) {
+    //   AccessTokenService().refreshAccessToken(accessToken, Const.clientId);
+    // }
 
-  bool isJson = true;
+    Map<String, String> queryParams = {
+      'method': 'foods.search',
+      'search_expression': query,
+      'page_number': pageNumber.toString(),
+      'format': 'json',
+    };
 
-  final String consumerKey, consumerKeySecret, accessToken, accessTokenSecret;
-
-  late Hmac _sigHasher;
-
-  FatsecretService(this.consumerKey, this.consumerKeySecret, this.accessToken,
-      this.accessTokenSecret) {
-    var bytes = utf8.encode("$consumerKeySecret&$accessTokenSecret");
-    _sigHasher = Hmac(sha1, bytes);
-  }
-
-  FatsecretService forceXml() {
-    isJson = false;
-    return this;
-  }
-
-  /// Sends a tweet with the supplied text and returns the response from the Twitter API.
-  Future<http.Response> request(Map<String, String> data) {
-    if (isJson) {
-      data["format"] = "json";
-    }
-    return _callGetApi("rest/server.api", data);
-  }
-
-  Future<http.Response> _callGetApi(String url, Map<String, String> data) {
-    Uri requestUrl = Uri.https(Const.baseUrl, url);
-
-    if (kDebugMode) {
-      print(data["method"]);
-    }
-    _setAuthParams("GET", requestUrl.toString(), data);
-
-    requestUrl = Uri.https(requestUrl.authority, requestUrl.path, data);
-
-    String oAuthHeader = _generateOAuthHeader(data);
-
-    // Build the OAuth HTTP Header from the data.
-    // Build the form data (exclude OAuth stuff that's already in the header).
-//    var formData = _filterMap(data, (k) => !k.startsWith("oauth_"));
-    return _sendGetRequest(requestUrl, oAuthHeader);
-  }
-
-  void _setAuthParams(String requestMethod, String url, Map<String, String> data) {
-
-    // Timestamps are in seconds since 1/1/1970.
-    // var timestamp = new DateTime.now().toUtc().difference(_epochUtc).inSeconds;
-    var millisecondsSinceEpoch = DateTime.now().toUtc().millisecondsSinceEpoch;
-    var timestamp = (millisecondsSinceEpoch  / 100).round();
-
-    // Add all the OAuth headers we'll need to use when constructing the hash.
-    data["oauth_consumer_key"] = consumerKey;
-    data["oauth_signature_method"] = "HMAC-SHA1";
-    data["oauth_timestamp"] = timestamp.toString();
-    data["oauth_nonce"] = _randomString(8); // Required, but Twitter doesn't appear to use it
-    if (accessToken.isNotEmpty) data["oauth_token"] = accessToken;
-    data["oauth_version"] = "1.0";
-
-    // Generate the OAuth signature and add it to our payload.
-    data["oauth_signature"] = _generateSignature(requestMethod, Uri.parse(url), data);
-  }
-
-  /// Generate an OAuth signature from OAuth header values.
-  String _generateSignature(String requestMethod, Uri url, Map<String, String> data) {
-    var sigString = _toQueryString(data);
-    var fullSigData = "$requestMethod&${_encode(url.toString())}&${_encode(sigString)}";
-
-    return base64.encode(_hash(fullSigData));
-  }
-
-  /// Generate the raw OAuth HTML header from the values (including signature).
-  String _generateOAuthHeader(Map<String, String> data) {
-    var oauthHeaderValues = _filterMap(data, (k) => k.startsWith("oauth_"));
-
-    return "OAuth ${_toOAuthHeader(oauthHeaderValues)}";
-  }
-
-  /// Send HTTP Request and return the response.
-  Future<http.Response> _sendGetRequest(Uri fullUrl, String oAuthHeader) async {
-    return await http.get(fullUrl, headers: { });
-  }
-
-  Map<String, String> _filterMap(
-      Map<String, String> map, bool Function(String key) test) {
-    return Map.fromIterable(map.keys.where(test), value: (k) => map[k]!);
-  }
-
-  String _toQueryString(Map<String, String> data) {
-    var items = data.keys.map((k) => "$k=${_encode(data[k]!)}").toList();
-    items.sort();
-
-    return items.join("&");
-  }
-
-  String _toOAuthHeader(Map<String, String> data) {
-    var items = data.keys.map((k) => "$k=\"${_encode(data[k]!)}\"").toList();
-    items.sort();
-
-    return items.join(", ");
-  }
-
-  List<int> _hash(String data) => _sigHasher.convert(data.codeUnits).bytes;
-
-  String _encode(String data) => percent.encode(data.codeUnits);
-
-  String _randomString(int length) {
-    var rand = Random();
-    var codeUnits = List.generate(
-        length,
-            (index){
-          return rand.nextInt(26)+97;
-        }
+    var response = await http.get(
+      Uri.https(Const.baseUrl, "/rest/server.api", queryParams),
+      headers: <String, String>{
+        'Content-Type': 'application/json;' 'charset=UTF-8',
+        'Authorization': 'Bearer ${accessToken.accessToken}'
+      },
     );
 
-    return String.fromCharCodes(codeUnits);
+    Map<String, dynamic> job = json.decode(response.body);
+    List<SearchFood> result = [];
+    if (response.statusCode == 200) {
+      if (job['foods']['food'] != null) {
+        result = (job['foods']['food'] as List)
+            .map((e) => SearchFood.fromMap(e))
+            .toList();
+      }
+    }
+    print(result);
+
+    return result;
+  }
+
+  static Future<List<Food>> getFood(
+      String foodId, AccessTokenResponse accessToken) async {
+    // if (accessToken.isExpired()) {
+    //   AccessTokenService().refreshAccessToken(accessToken, Const.clientId);
+    // }
+
+    Map<String, String> queryParams = {
+      'method': 'food.get.v2',
+      'food_id': foodId,
+      'format': 'json',
+    };
+
+    var response = await http.get(
+      Uri.https(Const.baseUrl, "/rest/server.api", queryParams),
+      headers: <String, String>{
+        'Content-Type': 'application/json;' 'charset=UTF-8',
+        'Authorization': 'Bearer ${accessToken.accessToken}'
+      },
+    );
+
+    Map<String, dynamic> job = json.decode(response.body);
+    List<Food> result = [];
+    print(job);
+    print(job['food']);
+    if (response.statusCode == 200) {
+      if (job['food'] != null) {
+        result = (job['food'] as List)
+          .map((e) => Food.fromMap(e))
+          .toList();
+        // Food food = (job['food']).map((e) => Food.fromMap(e));
+        // result.add(food);
+      }
+    }
+
+    return result;
   }
 }
