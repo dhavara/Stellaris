@@ -10,7 +10,7 @@ class FoodsPage extends StatefulWidget {
 class _FoodsPageState extends State<FoodsPage> {
   final storage = const FlutterSecureStorage();
 
-  bool isLoading = true;
+  bool isLoading = false;
   int currentPage = 1;
   String queryData = "Chicken";
   ScrollController scrollController = ScrollController();
@@ -62,7 +62,7 @@ class _FoodsPageState extends State<FoodsPage> {
   @override
   initState() {
     super.initState();
-    onStartSearchFood();
+    // onStartSearchFood();
     scrollController.addListener(() {
       if (scrollController.position.pixels ==
           scrollController.position.maxScrollExtent) {
