@@ -51,12 +51,14 @@ class _LoginPageState extends State<LoginPage> {
               child: Column(children: [
                 const SizedBox(height: 16),
                 TextFormField(
+                  cursorColor: const Color(0XFF91C788),
                   keyboardType: TextInputType.emailAddress,
                   decoration: const InputDecoration(
                     labelText: "Email",
                     labelStyle: TextStyle(color: Colors.black),
                     prefixIcon: Icon(Icons.email, color: Colors.black),
                     filled: true,
+                    fillColor: Colors.white,
                     focusedBorder: OutlineInputBorder(
                       borderSide: BorderSide(
                         color: Colors.black,
@@ -90,6 +92,7 @@ class _LoginPageState extends State<LoginPage> {
                 //Code for Form (Password)
                 const SizedBox(height: 16),
                 TextFormField(
+                  cursorColor: const Color(0XFF91C788),
                   obscureText: isHidden,
                   decoration: InputDecoration(
                     labelText: "Password",
@@ -106,6 +109,7 @@ class _LoginPageState extends State<LoginPage> {
                     labelStyle: const TextStyle(color: Colors.black),
                     prefixIcon: const Icon(Icons.lock, color: Colors.black),
                     filled: true,
+                    fillColor: Colors.white,
                     focusedBorder: const OutlineInputBorder(
                       borderSide: BorderSide(
                         color: Colors.black,

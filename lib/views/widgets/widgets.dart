@@ -4,7 +4,9 @@ import 'package:dietaryminder/views/pages/pages.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 part 'foodcard.dart';
 part 'detailedfoodcard.dart';
 part 'loadingui.dart';
+part 'toastui.dart';

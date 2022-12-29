@@ -1,3 +1,4 @@
+import 'package:dietaryminder/controller/controller.dart';
 import 'package:dietaryminder/models/models.dart';
 import 'package:dietaryminder/services/services.dart';
 import 'package:dietaryminder/shared/shared.dart';
@@ -13,6 +14,7 @@ part 'loginregister/registerpage.dart';
 part 'main/mainmenupage.dart';
 part 'main/home/homepage.dart';
 part 'main/calculate/calculatepage.dart';
+part 'main/calculate/calculateresultpage.dart';
 part 'main/foods/foodspage.dart';
 part 'main/foods/fooddetailpage.dart';
 part 'main/schedule/schedulepage.dart';

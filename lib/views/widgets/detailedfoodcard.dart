@@ -63,11 +63,12 @@ class _DetailedFoodCardState extends State<DetailedFoodCard> {
     String brandName = widget.brandName;
     return Center(
       child: Card(
+        elevation: 10,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(20.0),
+        ),
         color: Colors.white,
         margin: const EdgeInsets.fromLTRB(16, 8, 16, 8),
-        shape:
-            RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
-        elevation: 2,
         child: ListTile(
           title: Padding(
             padding: const EdgeInsets.fromLTRB(0, 8, 0, 8),

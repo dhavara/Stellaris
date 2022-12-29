@@ -105,6 +105,7 @@ class _FoodsPageState extends State<FoodsPage> {
                                   padding: const EdgeInsets.symmetric(
                                       horizontal: 16),
                                   child: TextFormField(
+                                    cursorColor: const Color(0XFF91C788),
                                     keyboardType: TextInputType.text,
                                     controller: ctrlQuery,
                                     decoration: const InputDecoration(
@@ -114,6 +115,7 @@ class _FoodsPageState extends State<FoodsPage> {
                                       prefixIcon: Icon(Icons.search,
                                           color: Colors.black),
                                       filled: true,
+                                      fillColor: Colors.white,
                                       focusedBorder: OutlineInputBorder(
                                         borderSide: BorderSide(
                                           color: Colors.black,
