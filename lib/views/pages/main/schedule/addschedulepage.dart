@@ -1,19 +1,19 @@
 part of '../../pages.dart';
 
-class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+class AddSchedulePage extends StatefulWidget {
+  const AddSchedulePage({super.key});
 
   @override
-  State<HomePage> createState() => _HomePageState();
+  State<AddSchedulePage> createState() => _AddSchedulePageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _AddSchedulePageState extends State<AddSchedulePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         resizeToAvoidBottomInset: false,
         appBar: AppBar(
-          title: const Text('Home'),
+          title: const Text('Add To Schedule'),
           backgroundColor: const Color(0xFF91C788),
         ),
         body: Container(
@@ -22,6 +22,8 @@ class _HomePageState extends State<HomePage> {
             padding: const EdgeInsets.fromLTRB(24, 16, 24, 16),
             child: Column(
               children: [],
-            )));
+            )
+        )
+    );
   }
 }

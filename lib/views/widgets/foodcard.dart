@@ -19,10 +19,10 @@ class _FoodCardState extends State<FoodCard> {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Expanded(
-          flex: 2,
+          flex: 1,
           child: Card(
               color: const Color(0xFF52734D),
-              margin: const EdgeInsets.fromLTRB(16, 8, 16, 8),
+              margin: const EdgeInsets.fromLTRB(16, 8, 8, 8),
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10.0)),
               elevation: 2,
@@ -31,7 +31,8 @@ class _FoodCardState extends State<FoodCard> {
                   Navigator.push<dynamic>(
                       context,
                       MaterialPageRoute<dynamic>(
-                          builder: (context) => FoodDetailPage(f1.foodId)));
+                          builder: (context) =>
+                              FoodDetailPage(f1.foodId, f1.brandName)));
                 },
                 child: ListTile(
                   title: Text(
@@ -61,10 +62,10 @@ class _FoodCardState extends State<FoodCard> {
               )),
         ),
         Expanded(
-          flex: 2,
+          flex: 1,
           child: Card(
               color: const Color(0xFF52734D),
-              margin: const EdgeInsets.fromLTRB(16, 8, 16, 8),
+              margin: const EdgeInsets.fromLTRB(8, 8, 16, 8),
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10.0)),
               elevation: 2,
@@ -73,7 +74,8 @@ class _FoodCardState extends State<FoodCard> {
                   Navigator.push<dynamic>(
                       context,
                       MaterialPageRoute<dynamic>(
-                          builder: (context) => FoodDetailPage(f2.foodId)));
+                          builder: (context) =>
+                              FoodDetailPage(f2.foodId, f2.brandName)));
                 },
                 child: ListTile(
                   title: Text(

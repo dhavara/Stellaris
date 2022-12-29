@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:dietaryminder/shared/shared.dart';
 import 'package:equatable/equatable.dart';
 
 part 'fatsecret/food/food.dart';

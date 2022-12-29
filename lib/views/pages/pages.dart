@@ -14,6 +14,6 @@ part 'main/mainmenupage.dart';
 part 'main/home/homepage.dart';
 part 'main/calculate/calculatepage.dart';
 part 'main/foods/foodspage.dart';
-part 'main/foods/foodstest.dart';
 part 'main/foods/fooddetailpage.dart';
 part 'main/schedule/schedulepage.dart';
+part 'main/schedule/addschedulepage.dart';

@@ -53,6 +53,10 @@ class _LoginPageState extends State<LoginPage> {
                 TextFormField(
                   keyboardType: TextInputType.emailAddress,
                   decoration: const InputDecoration(
+                    labelText: "Email",
+                    labelStyle: TextStyle(color: Colors.black),
+                    prefixIcon: Icon(Icons.email, color: Colors.black),
+                    filled: true,
                     focusedBorder: OutlineInputBorder(
                       borderSide: BorderSide(
                         color: Colors.black,

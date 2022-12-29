@@ -6,4 +6,5 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 part 'foodcard.dart';
+part 'detailedfoodcard.dart';
 part 'loadingui.dart';

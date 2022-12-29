@@ -17,7 +17,7 @@ class FatsecretService {
     var response = await http.get(
       Uri.https(Const.baseUrl, "/rest/server.api", queryParams),
       headers: <String, String>{
-        'Content-Type': 'application/json;' 'charset=UTF-8',
+        'Content-Type': 'application/json;',
         'Authorization': 'Bearer ${accessToken.accessToken}'
       },
     );
@@ -51,24 +51,20 @@ class FatsecretService {
     var response = await http.get(
       Uri.https(Const.baseUrl, "/rest/server.api", queryParams),
       headers: <String, String>{
-        'Content-Type': 'application/json;' 'charset=UTF-8',
+        'Content-Type': 'application/json;',
         'Authorization': 'Bearer ${accessToken.accessToken}'
       },
     );
 
-    Map<String, dynamic> job = json.decode(response.body);
+    var job = json.decode(response.body); // For some reason this returns an _InternalLinkedHashMap<String, dynamic>, assertion or cast won't fix
+    var foodJson = json.encode(job['food']); // "Recreating" the JSON works fine
     List<Food> result = [];
-    print(job);
-    print(job['food']);
+    print(foodJson);
     if (response.statusCode == 200) {
-      if (job['food'] != null) {
-        result = (job['food'] as List)
-          .map((e) => Food.fromMap(e))
-          .toList();
-        // Food food = (job['food']).map((e) => Food.fromMap(e));
-        // result.add(food);
-      }
+      Food data = Food.fromJson(foodJson); // Initialize Food model from the recreated JSON
+      result.add(data); // Add the model to the List so it can return as a List
     }
+    print(result);
 
     return result;
   }
