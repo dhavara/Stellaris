@@ -10,7 +10,7 @@ class FoodsPage extends StatefulWidget {
 class _FoodsPageState extends State<FoodsPage> {
   final storage = const FlutterSecureStorage();
 
-  bool isLoading = false;
+  bool isLoading = true;
   int currentPage = 1;
   String queryData = "Chicken";
   ScrollController scrollController = ScrollController();
@@ -40,7 +40,7 @@ class _FoodsPageState extends State<FoodsPage> {
         isLoading = false;
       });
     });
-    // return listFoods;
+    // return foodsList;
   }
 
   Future<dynamic> getMoreSearchData(String expression, int page) async {
@@ -52,7 +52,7 @@ class _FoodsPageState extends State<FoodsPage> {
         isLoading = false;
       });
     });
-    // return listFoods;
+    // return foodsList;
   }
 
   void onStartSearchFood() async {
@@ -62,7 +62,7 @@ class _FoodsPageState extends State<FoodsPage> {
   @override
   initState() {
     super.initState();
-    // onStartSearchFood();
+    onStartSearchFood();
     scrollController.addListener(() {
       if (scrollController.position.pixels ==
           scrollController.position.maxScrollExtent) {
