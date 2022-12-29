@@ -10,9 +10,9 @@ class FoodsPage extends StatefulWidget {
 class _FoodsPageState extends State<FoodsPage> {
   final storage = const FlutterSecureStorage();
 
-  bool isLoading = false;
+  bool isLoading = true;
   int currentPage = 1;
-  String queryData = "";
+  String queryData = "Chicken";
   ScrollController scrollController = ScrollController();
 
   final ctrlQuery = TextEditingController();
@@ -55,9 +55,14 @@ class _FoodsPageState extends State<FoodsPage> {
     // return listFoods;
   }
 
+  void onStartSearchFood() async {
+    foodsList = await getSearchData(queryData, currentPage);
+  }
+
   @override
   initState() {
     super.initState();
+    onStartSearchFood();
     scrollController.addListener(() {
       if (scrollController.position.pixels ==
           scrollController.position.maxScrollExtent) {
@@ -152,7 +157,6 @@ class _FoodsPageState extends State<FoodsPage> {
                                               backgroundColor:
                                                   const Color(0xFF91C788)),
                                           onPressed: () {
-                                            // MasterDataService.getMahasiswa();
                                             if (ctrlQuery.text.isEmpty) {
                                               // UiToast.toastErr("Field needs to be filled!");
                                             } else {
