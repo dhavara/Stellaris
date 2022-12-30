@@ -53,7 +53,7 @@ class _CalculateResultPageState extends State<CalculateResultPage> {
                         const Text('Height',
                             style: TextStyle(
                                 fontSize: 16, fontWeight: FontWeight.w800)),
-                        Text(height.toString(),
+                        Text('${height.toString()}cm',
                             style: const TextStyle(
                                 fontSize: 16, fontWeight: FontWeight.w400)),
                         const Divider(
@@ -62,7 +62,7 @@ class _CalculateResultPageState extends State<CalculateResultPage> {
                         const Text('Weight',
                             style: TextStyle(
                                 fontSize: 16, fontWeight: FontWeight.w800)),
-                        Text(weight.toString(),
+                        Text('${weight.toString()}kg',
                             style: const TextStyle(
                                 fontSize: 16, fontWeight: FontWeight.w400)),
                         const Divider(
@@ -71,7 +71,7 @@ class _CalculateResultPageState extends State<CalculateResultPage> {
                         const Text('Age',
                             style: TextStyle(
                                 fontSize: 16, fontWeight: FontWeight.w800)),
-                        Text(age.toString(),
+                        Text('${age.toString()} years old',
                             style: const TextStyle(
                                 fontSize: 16, fontWeight: FontWeight.w400)),
                         const Divider(
@@ -98,7 +98,7 @@ class _CalculateResultPageState extends State<CalculateResultPage> {
                         const Text('Calories',
                             style: TextStyle(
                                 fontSize: 16, fontWeight: FontWeight.w800)),
-                        Text(calories.toString(),
+                        Text('${calories.toString()}kcal',
                             style: const TextStyle(
                                 fontSize: 16, fontWeight: FontWeight.w400)),
                       ],

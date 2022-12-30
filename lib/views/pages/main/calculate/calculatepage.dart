@@ -112,7 +112,7 @@ class _CalculatePageState extends State<CalculatePage> {
                                   cursorColor: const Color(0XFF91C788),
                                   keyboardType: TextInputType.number,
                                   decoration: const InputDecoration(
-                                    icon: Icon(Icons.monitor_weight,
+                                    icon: Icon(Icons.fitness_center,
                                         color: Color(0XFF91C788)),
                                     labelText: "Weight",
                                     labelStyle: TextStyle(color: Colors.black),

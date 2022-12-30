@@ -57,6 +57,18 @@ class _DetailedFoodCardState extends State<DetailedFoodCard> {
     return widgetList;
   }
 
+  List<Serving> servingListFromFood(Food f) {
+    List<Serving> servingList = [];
+
+    if (f.servings!.serving?.first != null) {
+      for (var i = 0; i < f.servings!.serving!.length; i++) {
+        Serving s = f.servings!.serving![i];
+        servingList.add(s);
+      }
+    }
+    return servingList;
+  }
+
   @override
   Widget build(BuildContext context) {
     Food f = widget.food;
@@ -74,7 +86,6 @@ class _DetailedFoodCardState extends State<DetailedFoodCard> {
             padding: const EdgeInsets.fromLTRB(0, 8, 0, 8),
             child: Text("${Helper.getBrandNameNonNull(brandName)}${f.foodName}",
                 textAlign: TextAlign.center,
-                overflow: TextOverflow.ellipsis,
                 style: const TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 20,
@@ -126,7 +137,8 @@ class _DetailedFoodCardState extends State<DetailedFoodCard> {
                         Navigator.push<dynamic>(
                           context,
                           MaterialPageRoute<dynamic>(
-                              builder: (conrext) => const AddSchedulePage()),
+                              builder: (context) => AddSchedulePage(
+                                  f.foodId!, servingListFromFood(f))),
                         );
                       },
                       child: const Text("Add To Schedule")),
