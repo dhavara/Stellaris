@@ -84,8 +84,9 @@ class _FoodDetailPageState extends State<FoodDetailPage> {
                             child: FutureBuilder<dynamic>(
                                 future: foodData,
                                 builder: (context, snapshot) {
-                                  var food = snapshot.data;
+                                  print(snapshot.data);
                                   if (snapshot.hasData) {
+                                    var food = snapshot.data;
                                     return DetailedFoodCard(food[0], brandName);
                                   } else if (snapshot.hasError) {
                                     return Text(snapshot.error.toString());

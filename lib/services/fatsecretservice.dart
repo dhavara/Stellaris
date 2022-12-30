@@ -23,8 +23,9 @@ class FatsecretService {
     );
 
     Map<String, dynamic> job = json.decode(response.body);
+    print(job);
     List<SearchFood> result = [];
-    if (response.statusCode == 200) {
+    if (response.statusCode == 200 && job['error'] == null) {
       if (job['foods']['food'] != null) {
         result = (job['foods']['food'] as List)
             .map((e) => SearchFood.fromMap(e))
@@ -56,12 +57,14 @@ class FatsecretService {
       },
     );
 
-    var job = json.decode(response.body); // For some reason this returns an _InternalLinkedHashMap<String, dynamic>, assertion or cast won't fix
-    var foodJson = json.encode(job['food']); // "Recreating" the JSON works fine
+    var job = json.decode(response
+        .body); // For some reason this returns an _InternalLinkedHashMap<String, dynamic>, assertion or cast won't fix
     List<Food> result = [];
-    print(foodJson);
-    if (response.statusCode == 200) {
-      Food data = Food.fromJson(foodJson); // Initialize Food model from the recreated JSON
+    if (response.statusCode == 200 && job['error'] == null) {
+      var foodJson =
+          json.encode(job['food']); // "Recreating" the JSON works fine
+      Food data = Food.fromJson(
+          foodJson); // Initialize Food model from the recreated JSON
       result.add(data); // Add the model to the List so it can return as a List
     }
     print(result);
