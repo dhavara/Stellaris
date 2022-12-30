@@ -14,43 +14,21 @@ class _FoodDetailPageState extends State<FoodDetailPage> {
   bool isLoading = true;
 
   late Future<AccessTokenResponse> tokenData;
-  Future<AccessTokenResponse> reqAccessToken(
-      String clientId, String clientSecret) async {
-    AccessTokenResponse? accessToken;
-    await AccessTokenService()
-        .requestAccessToken(clientId, clientSecret)
-        .then((value) {
-      if (mounted) {
-        setState(() {
-          accessToken = value;
-        });
-      }
-    });
-    return accessToken!;
-  }
 
-  late Future<dynamic> foodData;
-  Future<dynamic> getFoodData(
-      String foodId, Future<AccessTokenResponse> accessToken) async {
-    List<Food> resultGetFood = [];
-    await FatsecretService.getFood(foodId, await accessToken).then((value) {
-      if (mounted) {
-        setState(() {
-          resultGetFood = value;
-          isLoading = false;
-        });
-      }
+  List<Food> foodList = [];
+  // Handling functions from FoodsController
+  void getFood() async {
+    var getFoodResults = await FoodsController.getFoodData(widget.foodId!);
+    setState(() {
+      foodList = getFoodResults[0];
+      isLoading = getFoodResults[1];
     });
-    print(resultGetFood);
-    return resultGetFood;
-    // return listFoods;
   }
 
   @override
   void initState() {
     super.initState();
-    tokenData = reqAccessToken(Const.clientId, Const.clientSecret);
-    foodData = getFoodData(widget.foodId!, tokenData);
+    getFood();
   }
 
   @override
@@ -81,20 +59,11 @@ class _FoodDetailPageState extends State<FoodDetailPage> {
                       child: SingleChildScrollView(
                         child: Container(
                             width: double.infinity,
-                            child: FutureBuilder<dynamic>(
-                                future: foodData,
-                                builder: (context, snapshot) {
-                                  print(snapshot.data);
-                                  if (snapshot.hasData) {
-                                    var food = snapshot.data;
-                                    return DetailedFoodCard(food[0], brandName);
-                                  } else if (snapshot.hasError) {
-                                    return Text(snapshot.error.toString());
-                                  } else {
-                                    return Center(
-                                        child: const Text('Loading...'));
-                                  }
-                                })),
+                            child: foodList.isEmpty
+                                ? const Align(
+                                    alignment: Alignment.center,
+                                    child: Text("No data."))
+                                : DetailedFoodCard(foodList[0], brandName)),
                       ),
                     )
                   ]),

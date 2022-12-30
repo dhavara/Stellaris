@@ -17,58 +17,27 @@ class _FoodsPageState extends State<FoodsPage> {
 
   final ctrlQuery = TextEditingController();
 
-  Future<AccessTokenResponse> reqAccessToken(
-      String clientId, String clientSecret) async {
-    AccessTokenResponse? accessToken;
-    await AccessTokenService()
-        .requestAccessToken(clientId, clientSecret)
-        .then((value) {
-      setState(() {
-        accessToken = value;
-      });
-    });
-    return accessToken!;
-  }
-
   List<SearchFood> foodsList = [];
-  Future<dynamic> getSearchData(String expression, int page) async {
-    await FatsecretService.searchFood(expression, page,
-            await reqAccessToken(Const.clientId, Const.clientSecret))
-        .then((value) {
-      setState(() {
-        foodsList = value;
-        isLoading = false;
-      });
+  // Handling functions from FoodsController
+  void searchFood() async { 
+    var searchFoodResults =
+        await FoodsController.getSearchData(queryData, currentPage);
+    setState(() {
+      foodsList = searchFoodResults[0];
+      isLoading = searchFoodResults[1];
     });
-    // return foodsList;
-  }
-
-  Future<dynamic> getMoreSearchData(String expression, int page) async {
-    await FatsecretService.searchFood(expression, page,
-            await reqAccessToken(Const.clientId, Const.clientSecret))
-        .then((value) {
-      setState(() {
-        foodsList += value;
-        isLoading = false;
-      });
-    });
-    // return foodsList;
-  }
-
-  void onStartSearchFood() async {
-    foodsList = await getSearchData(queryData, currentPage);
   }
 
   @override
   initState() {
     super.initState();
-    onStartSearchFood();
+    searchFood();
     scrollController.addListener(() {
       if (scrollController.position.pixels ==
           scrollController.position.maxScrollExtent) {
         isLoading = true;
         currentPage += 1;
-        getMoreSearchData(queryData, currentPage);
+        searchFood();
       }
     });
   }
@@ -167,8 +136,7 @@ class _FoodsPageState extends State<FoodsPage> {
                                                 isLoading = true;
                                               });
                                               currentPage = 1;
-                                              getSearchData(
-                                                  queryData, currentPage);
+                                              searchFood();
                                             }
                                           },
                                           child: const Icon(Icons.search,
