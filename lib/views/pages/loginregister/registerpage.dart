@@ -27,6 +27,15 @@ class _RegisterPageState extends State<RegisterPage> {
     super.dispose();
   }
 
+  bool isSuccess = false;
+  void register(String name, String email, String password) async {
+    var getRegisterValidation =
+        await LoginRegisterController.register(name, email, password);
+    setState(() {
+      isSuccess = getRegisterValidation;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -198,10 +207,16 @@ class _RegisterPageState extends State<RegisterPage> {
                           backgroundColor: const Color(0XFF91C788)),
                       onPressed: () {
                         if (_registerKey.currentState!.validate()) {
+                          isSuccess
+                              ? LoginRegisterController.navigateToMainMenu(
+                                  context)
+                              : register(
+                                  ctrlName.text, ctrlEmail.text, ctrlPass.text);
                           showDialog(
                             context: context,
                             builder: (context) => AlertDialog(
-                              content: const Text('Successfully logged in!'),
+                              content:
+                                  const Text('Please fill all the fields!'),
                               actions: [
                                 TextButton(
                                     style: TextButton.styleFrom(
@@ -209,14 +224,9 @@ class _RegisterPageState extends State<RegisterPage> {
                                         foregroundColor:
                                             const Color(0XFF91C788)),
                                     onPressed: () {
-                                      Navigator.pushAndRemoveUntil<dynamic>(
-                                          context,
-                                          MaterialPageRoute<dynamic>(
-                                              builder: (conrext) =>
-                                                  const MainMenuPage()),
-                                          (route) => false);
+                                      Navigator.pop(context);
                                     },
-                                    child: const Text('Continue'))
+                                    child: const Text('Try Again'))
                               ],
                             ),
                           );
