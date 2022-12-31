@@ -73,79 +73,77 @@ class _DetailedFoodCardState extends State<DetailedFoodCard> {
   Widget build(BuildContext context) {
     Food f = widget.food;
     String brandName = widget.brandName;
-    return Center(
-      child: Card(
-        elevation: 10,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(20.0),
+    return Card(
+      elevation: 10,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(20.0),
+      ),
+      color: Colors.white,
+      margin: const EdgeInsets.fromLTRB(16, 8, 16, 8),
+      child: ListTile(
+        title: Padding(
+          padding: const EdgeInsets.fromLTRB(0, 8, 0, 8),
+          child: Text("${Helper.getBrandNameNonNull(brandName)}${f.foodName}",
+              textAlign: TextAlign.center,
+              style: const TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 20,
+                  color: Colors.black)),
         ),
-        color: Colors.white,
-        margin: const EdgeInsets.fromLTRB(16, 8, 16, 8),
-        child: ListTile(
-          title: Padding(
-            padding: const EdgeInsets.fromLTRB(0, 8, 0, 8),
-            child: Text("${Helper.getBrandNameNonNull(brandName)}${f.foodName}",
-                textAlign: TextAlign.center,
+        subtitle: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Align(
+              alignment: Alignment.center,
+              child: Text(
+                "${f.foodType}",
                 style: const TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 20,
-                    color: Colors.black)),
-          ),
-          subtitle: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Align(
-                alignment: Alignment.center,
-                child: Text(
-                  "${f.foodType}",
-                  style: const TextStyle(
-                      fontWeight: FontWeight.w400,
-                      fontSize: 16,
-                      color: Colors.black54),
-                ),
+                    fontWeight: FontWeight.w400,
+                    fontSize: 16,
+                    color: Colors.black54),
               ),
-              const Divider(
-                thickness: 2,
+            ),
+            const Divider(
+              thickness: 2,
+            ),
+            const Align(
+              alignment: Alignment.center,
+              child: Text(
+                "Calories (in cal)",
+                style: TextStyle(
+                    fontWeight: FontWeight.w800,
+                    fontSize: 16,
+                    color: Colors.black54),
               ),
-              const Align(
-                alignment: Alignment.center,
-                child: Text(
-                  "Calories (in cal)",
-                  style: TextStyle(
-                      fontWeight: FontWeight.w800,
-                      fontSize: 16,
-                      color: Colors.black54),
-                ),
+            ),
+            const Divider(
+              thickness: 2,
+            ),
+            Column(
+              children: servingsWidget(f),
+            ),
+            const SizedBox(height: 16),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(0, 0, 0, 16),
+              child: SizedBox(
+                width: double.infinity,
+                child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                        shape: const StadiumBorder(),
+                        backgroundColor: const Color(0XFF91C788)),
+                    onPressed: () {
+                      Navigator.push<dynamic>(
+                        context,
+                        MaterialPageRoute<dynamic>(
+                            builder: (context) => AddSchedulePage(
+                                f.foodId!, servingListFromFood(f))),
+                      );
+                    },
+                    child: const Text("Add To Schedule")),
               ),
-              const Divider(
-                thickness: 2,
-              ),
-              Column(
-                children: servingsWidget(f),
-              ),
-              const SizedBox(height: 16),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(0, 0, 0, 16),
-                child: SizedBox(
-                  width: double.infinity,
-                  child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                          shape: const StadiumBorder(),
-                          backgroundColor: const Color(0XFF91C788)),
-                      onPressed: () {
-                        Navigator.push<dynamic>(
-                          context,
-                          MaterialPageRoute<dynamic>(
-                              builder: (context) => AddSchedulePage(
-                                  f.foodId!, servingListFromFood(f))),
-                        );
-                      },
-                      child: const Text("Add To Schedule")),
-                ),
-              ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

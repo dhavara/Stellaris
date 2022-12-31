@@ -1,8 +1,7 @@
 part of '../../pages.dart';
 
 class FoodsPage extends StatefulWidget {
-  final User user;
-  FoodsPage(this.user);
+  const FoodsPage({super.key});
 
   @override
   State<FoodsPage> createState() => _FoodsPageState();
@@ -22,7 +21,7 @@ class _FoodsPageState extends State<FoodsPage> {
   // Handling functions from FoodsController
   void searchFood() async {
     var searchFoodResults =
-        await FoodsController.getSearchData(queryData, currentPage);
+        await FoodsController.getSearchData(queryData, currentPage, foodsList);
     setState(() {
       foodsList = searchFoodResults[0];
       isLoading = searchFoodResults[1];
@@ -36,8 +35,10 @@ class _FoodsPageState extends State<FoodsPage> {
     scrollController.addListener(() {
       if (scrollController.position.pixels ==
           scrollController.position.maxScrollExtent) {
-        isLoading = true;
-        currentPage += 1;
+        setState(() {
+          isLoading = true;
+          currentPage += 1;
+        });
         searchFood();
       }
     });

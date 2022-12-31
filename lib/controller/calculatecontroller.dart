@@ -53,4 +53,25 @@ class CalculateController {
     }
     return dateTimeString;
   }
+
+  static Future<bool> createCalculateHistory(
+      String userId,
+      String height,
+      String weight,
+      String age,
+      String gender,
+      String activity,
+      String calorie) async {
+    var response = await StellarisService.createCalculationHistory(
+        userId, height, weight, age, gender, activity, calorie);
+
+    var job = json.decode(response.body);
+    print(job);
+
+    if (response.statusCode == 201 && job['message'] != null) {
+      return true;
+    } else {
+      return false;
+    }
+  }
 }

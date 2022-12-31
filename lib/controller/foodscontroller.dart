@@ -14,10 +14,11 @@ class FoodsController {
   }
 
   // Handling API Request from FatsecretService
-  static Future<dynamic> getSearchData(String expression, int page) async {
-    List<SearchFood> foodsList = [];
+  static Future<dynamic> getSearchData(
+      String expression, int page, List<SearchFood> foodsList) async {
     bool isLoading = true;
 
+    print(page);
     await FatsecretService.searchFood(expression, page,
             await reqAccessToken(Const.clientId, Const.clientSecret))
         .then((value) {

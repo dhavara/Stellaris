@@ -29,7 +29,8 @@ class _LoginPageState extends State<LoginPage> {
     });
     if (!mounted) return;
     if (user.id != "0") {
-      // BlocProvider.of<UserCubit>(context).login(user);
+      BlocProvider.of<UserCubit>(context).login(user);
+      SharedPrefs.update(user.id!);
       ToastUi.toastOk('Logged in successfully!');
       LoginRegisterController.navigateToMainMenu(context, user);
     } else {

@@ -36,12 +36,10 @@ class _RegisterPageState extends State<RegisterPage> {
     });
     if (!mounted) return;
     if (user.id != "0") {
-      // BlocProvider.of<UserCubit>(context).login(user);
+      BlocProvider.of<UserCubit>(context).login(user);
+      SharedPrefs.update(user.id!);
       ToastUi.toastOk('Registered successfully!');
-      Navigator.pushAndRemoveUntil<dynamic>(
-          context,
-          MaterialPageRoute<dynamic>(builder: (context) => MainMenuPage(user)),
-          (route) => false);
+      LoginRegisterController.navigateToMainMenu(context, user);
     } else {
       ToastUi.toastErr(user.name!);
     }

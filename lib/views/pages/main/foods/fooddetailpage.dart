@@ -63,7 +63,9 @@ class _FoodDetailPageState extends State<FoodDetailPage> {
                                 ? const Align(
                                     alignment: Alignment.center,
                                     child: Text("No data."))
-                                : DetailedFoodCard(foodList[0], brandName)),
+                                : Center(
+                                    child: DetailedFoodCard(
+                                        foodList[0], brandName))),
                       ),
                     )
                   ]),

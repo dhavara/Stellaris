@@ -3,8 +3,7 @@
 part of '../../pages.dart';
 
 class SchedulePage extends StatefulWidget {
-  final User user;
-  SchedulePage(this.user);
+  const SchedulePage({super.key});
 
   @override
   State<SchedulePage> createState() => _SchedulePageState();

@@ -9,7 +9,7 @@ class LoginRegisterController {
     print(job);
 
     if (response.statusCode == 201 && job['message'] != null) {
-      var userJson = json.encode(job['user'][0]);
+      var userJson = json.encode(job['user']);
       return User.fromJson(userJson);
     } else {
       return User(id: '0', name: job['error']);
@@ -33,7 +33,21 @@ class LoginRegisterController {
   static void navigateToMainMenu(BuildContext context, User user) {
     Navigator.pushAndRemoveUntil<dynamic>(
         context,
-        MaterialPageRoute<dynamic>(builder: (context) => MainMenuPage(user)),
+        MaterialPageRoute<dynamic>(builder: (context) => const MainMenuPage()),
         (route) => false);
+  }
+
+  static Future<User> getUserById(String id) async {
+    var response = await StellarisService.getUserById(id);
+
+    var job = json.decode(response.body);
+    print(job);
+
+    if (response.statusCode == 200 && job['message'] != null) {
+      var userJson = json.encode(job['user']);
+      return User.fromJson(userJson);
+    } else {
+      return User(id: '0', name: job['error']);
+    }
   }
 }

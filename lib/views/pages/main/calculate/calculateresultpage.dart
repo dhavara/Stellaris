@@ -1,8 +1,7 @@
 part of '../../pages.dart';
 
 class CalculateResultPage extends StatefulWidget {
-  final String height, weight, age, gender, activity;
-  final double calories;
+  final String height, weight, age, gender, activity, calories;
 
   CalculateResultPage(this.height, this.weight, this.age, this.gender,
       this.activity, this.calories);
@@ -19,7 +18,7 @@ class _CalculateResultPageState extends State<CalculateResultPage> {
     String age = widget.age;
     String gender = widget.gender;
     String activity = widget.activity;
-    double calories = widget.calories;
+    String calories = widget.calories;
     return Scaffold(
         resizeToAvoidBottomInset: false,
         appBar: AppBar(
