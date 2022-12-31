@@ -13,17 +13,12 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MultiBlocProvider(
-      providers: [
-        BlocProvider<UserCubit>(create: (BuildContext context) => UserCubit(null))
-      ],
-      child: MaterialApp(
-          title: 'Stellaris',
-          theme: ThemeData(
-            scaffoldBackgroundColor: const Color(0xFFFEFFDE),
-          ),
-          debugShowCheckedModeBanner: false,
-          home: const LoginPage()),
-    );
+    return MaterialApp(
+        title: 'Stellaris',
+        theme: ThemeData(
+          scaffoldBackgroundColor: const Color(0xFFFEFFDE),
+        ),
+        debugShowCheckedModeBanner: false,
+        home: const LoginPage());
   }
 }
