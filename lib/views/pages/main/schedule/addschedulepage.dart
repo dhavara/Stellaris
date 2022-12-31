@@ -1,42 +1,58 @@
 part of '../../pages.dart';
 
-class CalculatePage extends StatefulWidget {
-  const CalculatePage({super.key});
+class AddSchedulePage extends StatefulWidget {
+  final String foodId;
+  final List<Serving> servings;
+  AddSchedulePage(this.foodId, this.servings);
 
   @override
-  State<CalculatePage> createState() => _CalculatePageState();
+  State<AddSchedulePage> createState() => _AddSchedulePageState();
 }
 
-class _CalculatePageState extends State<CalculatePage> {
-  String selectedGender = 'Male';
-  var enumGender = ['Male', 'Female'];
+class _AddSchedulePageState extends State<AddSchedulePage> {
+  final _scheduleKey = GlobalKey<FormState>();
+  final ctrlId = TextEditingController();
+  final ctrlDate = TextEditingController();
+  final ctrlTime = TextEditingController();
+  final ctrlQuantity = TextEditingController();
 
   @override
   void initState() {
     super.initState();
+    ctrlId.text = widget.foodId;
   }
-
-  final _calculateKey = GlobalKey<FormState>();
-  final ctrlHeight = TextEditingController();
-  final ctrlWeight = TextEditingController();
-  final ctrlAge = TextEditingController();
-  final ctrlActivity = TextEditingController();
 
   @override
   void dispose() {
-    ctrlHeight.dispose();
-    ctrlWeight.dispose();
-    ctrlAge.dispose();
-    ctrlActivity.dispose();
+    ctrlId.dispose();
+    ctrlDate.dispose();
+    ctrlTime.dispose();
+    ctrlQuantity.dispose();
     super.dispose();
+  }
+
+  List<String> getAllMeasurements(List<Serving> s) {
+    List<String> measurementList = [];
+
+    for (int i = 0; i < s.length; i++) {
+      measurementList.add(s[i].measurementDescription!);
+    }
+
+    return measurementList;
   }
 
   @override
   Widget build(BuildContext context) {
+    String foodId = widget.foodId;
+    List<Serving> servings = widget.servings;
+    String selectedMeasurement = widget.servings[0].measurementDescription!;
+
+    print(servings);
+
     return Scaffold(
         resizeToAvoidBottomInset: false,
         appBar: AppBar(
-          title: const Text('Calculate Calories'),
+          title: const Text('Schedule'),
           backgroundColor: const Color(0xFF91C788),
         ),
         body: Container(
@@ -51,70 +67,117 @@ class _CalculatePageState extends State<CalculatePage> {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
-                        const Text("Calculate",
+                        const Text("Add To Schedule",
                             style: TextStyle(
                                 fontWeight: FontWeight.w400, fontSize: 24)),
                         const Text(
-                          "Your amount of calories needed per day",
+                          "Your very own food schedule",
                           style: TextStyle(fontSize: 16, color: Colors.grey),
                         ),
 
                         //Code for Form (Height)
                         const SizedBox(height: 24),
                         Form(
-                            key: _calculateKey,
+                            key: _scheduleKey,
                             child: Column(
                               children: [
                                 TextFormField(
+                                  enabled: false,
                                   cursorColor: const Color(0XFF91C788),
                                   keyboardType: TextInputType.number,
-                                  decoration: const InputDecoration(
-                                    icon: Icon(Icons.height,
+                                  decoration: InputDecoration(
+                                    hintText: foodId,
+                                    icon: const Icon(Icons.fastfood,
                                         color: Color(0XFF91C788)),
-                                    labelText: "Height",
-                                    labelStyle: TextStyle(color: Colors.black),
+                                    labelText: "Food ID",
+                                    labelStyle:
+                                        const TextStyle(color: Colors.black),
                                     filled: true,
-                                    fillColor: Colors.white,
-                                    focusedBorder: OutlineInputBorder(
+                                    fillColor: Colors.grey,
+                                    disabledBorder: const OutlineInputBorder(
                                       borderSide: BorderSide(
                                         color: Colors.black,
                                       ),
                                     ),
-                                    enabledBorder: OutlineInputBorder(
+                                    focusedBorder: const OutlineInputBorder(
                                       borderSide: BorderSide(
                                         color: Colors.black,
                                       ),
                                     ),
-                                    errorBorder: OutlineInputBorder(
+                                    enabledBorder: const OutlineInputBorder(
+                                      borderSide: BorderSide(
+                                        color: Colors.black,
+                                      ),
+                                    ),
+                                    errorBorder: const OutlineInputBorder(
                                       borderSide: BorderSide(
                                         color: Colors.red,
                                       ),
                                     ),
-                                    focusedErrorBorder: OutlineInputBorder(
+                                    focusedErrorBorder:
+                                        const OutlineInputBorder(
                                       borderSide: BorderSide(
                                         color: Colors.red,
                                       ),
                                     ),
                                   ),
-                                  controller: ctrlHeight,
-                                  autovalidateMode:
-                                      AutovalidateMode.onUserInteraction,
-                                  validator: (value) {
-                                    return value.toString().length > 3
-                                        ? 'Height must be at most 3 digits!'
-                                        : null;
-                                  },
+                                  controller: ctrlId,
                                 ),
 
                                 //Code for Form (Weight)
                                 const SizedBox(height: 24),
                                 TextFormField(
+                                  onTap: () async {
+                                    DateTime date = DateTime.now();
+                                    DateTime? pickedDate = await showDatePicker(
+                                      context: context,
+                                      initialDate: date,
+                                      firstDate: DateTime(2020),
+                                      lastDate: DateTime(2024),
+                                      builder: (context, child) {
+                                        return Theme(
+                                          data: Theme.of(context).copyWith(
+                                            colorScheme:
+                                                const ColorScheme.light(
+                                              primary: Color(0XFF52734D),
+                                              onPrimary: Colors.white,
+                                              onSurface: Colors.black,
+                                            ),
+                                            textButtonTheme:
+                                                TextButtonThemeData(
+                                              style: TextButton.styleFrom(
+                                                foregroundColor:
+                                                    const Color(0XFF91C788),
+                                              ),
+                                            ),
+                                          ),
+                                          child: child!,
+                                        );
+                                      },
+                                    );
+
+                                    if (pickedDate != null) {
+                                      String formattedDate =
+                                          DateFormat('dd/MM/yyyy')
+                                              .format(pickedDate);
+                                      setState(() {
+                                        ctrlDate.text = formattedDate;
+                                      });
+                                    } else {
+                                      String formattedDate =
+                                          DateFormat('dd/MM/yyyy').format(date);
+                                      setState(() {
+                                        ctrlDate.text = formattedDate;
+                                      });
+                                    }
+                                  },
+                                  readOnly: true,
                                   cursorColor: const Color(0XFF91C788),
-                                  keyboardType: TextInputType.number,
+                                  keyboardType: TextInputType.datetime,
                                   decoration: const InputDecoration(
-                                    icon: Icon(Icons.fitness_center,
+                                    icon: Icon(Icons.calendar_month,
                                         color: Color(0XFF91C788)),
-                                    labelText: "Weight",
+                                    labelText: "Date",
                                     labelStyle: TextStyle(color: Colors.black),
                                     filled: true,
                                     fillColor: Colors.white,
@@ -139,12 +202,12 @@ class _CalculatePageState extends State<CalculatePage> {
                                       ),
                                     ),
                                   ),
-                                  controller: ctrlWeight,
+                                  controller: ctrlDate,
                                   autovalidateMode:
                                       AutovalidateMode.onUserInteraction,
                                   validator: (value) {
-                                    return value.toString().length > 3
-                                        ? 'Weight must be at most 3 digits!'
+                                    return value!.isEmpty
+                                        ? 'Date cannot be empty!'
                                         : null;
                                   },
                                 ),
@@ -152,12 +215,58 @@ class _CalculatePageState extends State<CalculatePage> {
                                 //Code for Form (Age)
                                 const SizedBox(height: 24),
                                 TextFormField(
+                                  onTap: () async {
+                                    TimeOfDay time = TimeOfDay.now();
+                                    TimeOfDay? pickedTime =
+                                        await showTimePicker(
+                                      context: context,
+                                      initialTime: time,
+                                      builder: (context, child) {
+                                        return Theme(
+                                          data: Theme.of(context).copyWith(
+                                            colorScheme:
+                                                const ColorScheme.light(
+                                              primary: Color(0XFF52734D),
+                                              onPrimary: Colors.white,
+                                              onSurface: Colors.black,
+                                            ),
+                                            textButtonTheme:
+                                                TextButtonThemeData(
+                                              style: TextButton.styleFrom(
+                                                foregroundColor:
+                                                    const Color(0XFF91C788),
+                                              ),
+                                            ),
+                                          ),
+                                          child: child!,
+                                        );
+                                      },
+                                    );
+                                    if (mounted) {
+                                      if (pickedTime != null &&
+                                          pickedTime != time) {
+                                        time = pickedTime;
+                                        String formattedTime =
+                                            pickedTime.format(context);
+                                        setState(() {
+                                          ctrlTime.text = formattedTime;
+                                        });
+                                      } else {
+                                        String formattedTime =
+                                            time.format(context);
+                                        setState(() {
+                                          ctrlTime.text = formattedTime;
+                                        });
+                                      }
+                                    }
+                                  },
+                                  readOnly: true,
                                   cursorColor: const Color(0XFF91C788),
                                   keyboardType: TextInputType.number,
                                   decoration: const InputDecoration(
-                                    icon: Icon(Icons.numbers,
+                                    icon: Icon(Icons.timer_outlined,
                                         color: Color(0XFF91C788)),
-                                    labelText: "Age",
+                                    labelText: "Time",
                                     labelStyle: TextStyle(color: Colors.black),
                                     filled: true,
                                     fillColor: Colors.white,
@@ -182,12 +291,12 @@ class _CalculatePageState extends State<CalculatePage> {
                                       ),
                                     ),
                                   ),
-                                  controller: ctrlAge,
+                                  controller: ctrlTime,
                                   autovalidateMode:
                                       AutovalidateMode.onUserInteraction,
                                   validator: (value) {
-                                    return value.toString().length > 2
-                                        ? 'Age must be at most 2 digits!'
+                                    return value!.isEmpty
+                                        ? 'Time cannot be empty!'
                                         : null;
                                   },
                                 ),
@@ -197,9 +306,9 @@ class _CalculatePageState extends State<CalculatePage> {
                                 DropdownButtonFormField(
                                     focusColor: Colors.transparent,
                                     decoration: const InputDecoration(
-                                      icon: Icon(Icons.person,
+                                      icon: Icon(Icons.architecture,
                                           color: Color(0XFF91C788)),
-                                      labelText: "Gender",
+                                      labelText: "Measurement",
                                       labelStyle:
                                           TextStyle(color: Colors.black),
                                       filled: true,
@@ -225,14 +334,29 @@ class _CalculatePageState extends State<CalculatePage> {
                                         ),
                                       ),
                                     ),
-                                    value: selectedGender,
-                                    items: enumGender.map((String items) {
+                                    isExpanded: true,
+                                    value: selectedMeasurement,
+                                    selectedItemBuilder:
+                                        (BuildContext context) {
+                                      return getAllMeasurements(servings)
+                                          .map((String items) {
+                                        return Text(items,
+                                            overflow: TextOverflow.ellipsis);
+                                      }).toList();
+                                    },
+                                    items: getAllMeasurements(servings)
+                                        .map((String items) {
                                       return DropdownMenuItem(
-                                          value: items, child: Text(items));
+                                          value: items,
+                                          child: Text(items,
+                                              maxLines: 2,
+                                              style: const TextStyle(
+                                                  overflow:
+                                                      TextOverflow.ellipsis)));
                                     }).toList(),
                                     onChanged: (String? newValue) {
                                       setState(() {
-                                        selectedGender = newValue!;
+                                        selectedMeasurement = newValue!;
                                       });
                                     }),
 
@@ -240,11 +364,11 @@ class _CalculatePageState extends State<CalculatePage> {
                                 const SizedBox(height: 24),
                                 TextFormField(
                                   cursorColor: const Color(0XFF91C788),
-                                  keyboardType: TextInputType.text,
+                                  keyboardType: TextInputType.number,
                                   decoration: const InputDecoration(
-                                    icon: Icon(Icons.local_activity,
+                                    icon: Icon(Icons.discount,
                                         color: Color(0XFF91C788)),
-                                    labelText: "Activity",
+                                    labelText: "Quantity",
                                     labelStyle: TextStyle(color: Colors.black),
                                     filled: true,
                                     fillColor: Colors.white,
@@ -269,12 +393,12 @@ class _CalculatePageState extends State<CalculatePage> {
                                       ),
                                     ),
                                   ),
-                                  controller: ctrlActivity,
+                                  controller: ctrlQuantity,
                                   autovalidateMode:
                                       AutovalidateMode.onUserInteraction,
                                   validator: (value) {
-                                    return value.toString().length > 20
-                                        ? 'Activity must be at most 20 characters!'
+                                    return value.toString().length > 4
+                                        ? 'Quantity must be at most 4 characters!'
                                         : null;
                                   },
                                 ),
@@ -288,46 +412,20 @@ class _CalculatePageState extends State<CalculatePage> {
                                         backgroundColor:
                                             const Color(0XFF91C788)),
                                     onPressed: () {
-                                      if (ctrlHeight.text.isEmpty &&
-                                          ctrlWeight.text.isEmpty &&
-                                          ctrlAge.text.isEmpty &&
-                                          ctrlActivity.text.isEmpty) {
+                                      if (ctrlDate.text.isEmpty &&
+                                          ctrlTime.text.isEmpty &&
+                                          ctrlQuantity.text.isEmpty) {
                                         ToastUi.toastErr(
                                             "Please fill all the fields first!");
-                                      } else if (ctrlHeight.text.isEmpty ||
-                                          ctrlWeight.text.isEmpty ||
-                                          ctrlAge.text.isEmpty ||
-                                          ctrlActivity.text.isEmpty) {
+                                      } else if (ctrlDate.text.isEmpty ||
+                                          ctrlTime.text.isEmpty ||
+                                          ctrlQuantity.text.isEmpty) {
                                         ToastUi.toastErr(
                                             "One or more field is empty!");
                                       } else {
-                                        double calories = CalculateController
-                                            .calculateCalories(
-                                                selectedGender,
-                                                int.parse(ctrlAge.text),
-                                                int.parse(ctrlHeight.text),
-                                                int.parse(ctrlWeight.text));
                                         ToastUi.toastOk(
                                             "Form submitted successfully!");
-                                        Navigator.push<dynamic>(
-                                                context,
-                                                MaterialPageRoute<dynamic>(
-                                                    builder: (context) =>
-                                                        CalculateResultPage(
-                                                            ctrlHeight.text,
-                                                            ctrlWeight.text,
-                                                            ctrlAge.text,
-                                                            selectedGender,
-                                                            ctrlActivity.text,
-                                                            calories)))
-                                            .then((value) {
-                                          setState(() {
-                                            ctrlHeight.text = "";
-                                            ctrlWeight.text = "";
-                                            ctrlAge.text = "";
-                                            ctrlActivity.text = "";
-                                          });
-                                        });
+                                        Navigator.pop(context, true);
                                       }
                                     },
                                     child: const Text("Calculate!"),

@@ -22,8 +22,6 @@ class _HomePageState extends State<HomePage> {
             padding: const EdgeInsets.fromLTRB(24, 16, 24, 16),
             child: Column(
               children: [],
-            )
-        )
-    );
+            )));
   }
 }
