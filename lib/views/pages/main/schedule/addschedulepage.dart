@@ -428,7 +428,7 @@ class _AddSchedulePageState extends State<AddSchedulePage> {
                                         Navigator.pop(context, true);
                                       }
                                     },
-                                    child: const Text("Calculate!"),
+                                    child: const Text("Add to schedule!"),
                                   ),
                                 )
                               ],

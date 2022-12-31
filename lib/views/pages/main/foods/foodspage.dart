@@ -1,7 +1,8 @@
 part of '../../pages.dart';
 
 class FoodsPage extends StatefulWidget {
-  const FoodsPage({super.key});
+  final User user;
+  FoodsPage(this.user);
 
   @override
   State<FoodsPage> createState() => _FoodsPageState();
@@ -19,7 +20,7 @@ class _FoodsPageState extends State<FoodsPage> {
 
   List<SearchFood> foodsList = [];
   // Handling functions from FoodsController
-  void searchFood() async { 
+  void searchFood() async {
     var searchFoodResults =
         await FoodsController.getSearchData(queryData, currentPage);
     setState(() {

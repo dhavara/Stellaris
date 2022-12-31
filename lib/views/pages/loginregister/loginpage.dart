@@ -20,6 +20,23 @@ class _LoginPageState extends State<LoginPage> {
     super.dispose();
   }
 
+  late User user;
+  void register(String email, String password) async {
+    await LoginRegisterController.login(email, password).then((value) {
+      setState(() {
+        user = value;
+      });
+    });
+    if (!mounted) return;
+    if (user.id != "0") {
+      // BlocProvider.of<UserCubit>(context).login(user);
+      ToastUi.toastOk('Logged in successfully!');
+      LoginRegisterController.navigateToMainMenu(context, user);
+    } else {
+      ToastUi.toastErr(user.name!);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -150,28 +167,7 @@ class _LoginPageState extends State<LoginPage> {
                           backgroundColor: const Color(0XFF91C788)),
                       onPressed: () {
                         if (_loginKey.currentState!.validate()) {
-                          showDialog(
-                            context: context,
-                            builder: (context) => AlertDialog(
-                              content: const Text('Successfully logged in!'),
-                              actions: [
-                                TextButton(
-                                    style: TextButton.styleFrom(
-                                        backgroundColor: Colors.white,
-                                        foregroundColor:
-                                            const Color(0XFF91C788)),
-                                    onPressed: () {
-                                      Navigator.pushAndRemoveUntil<dynamic>(
-                                          context,
-                                          MaterialPageRoute<dynamic>(
-                                              builder: (context) =>
-                                                  const MainMenuPage()),
-                                          (route) => false);
-                                    },
-                                    child: const Text('Continue'))
-                              ],
-                            ),
-                          );
+                          register(ctrlEmail.text, ctrlPass.text);
                         } else {
                           showDialog(
                             context: context,

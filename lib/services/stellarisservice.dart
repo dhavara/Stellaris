@@ -1,10 +1,8 @@
 part of 'services.dart';
 
 class StellarisService {
-  static Future<bool> register(
+  static Future<http.Response> register(
       String name, String email, String password) async {
-    bool isSuccess = false;
-
     var response = await http.post(Uri.https(Const.stellarisUrl, "/api/user"),
         headers: <String, String>{
           'Content-Type': 'application/x-www-form-urlencoded',
@@ -16,14 +14,21 @@ class StellarisService {
           'password': password,
         });
 
-    print(response.body);
-    Map<String, dynamic> job = json.decode(response.body);
-    print(response.statusCode);
-    if (response.statusCode == 201 || response.statusCode == 200) {
-      if (job['message'] != null) {
-        isSuccess = true;
-      }
-    }
-    return isSuccess;
+    return response;
+  }
+
+  static Future<http.Response> login(String email, String password) async {
+    var response = await http.post(
+        Uri.https(Const.stellarisUrl, "/api/user/login"),
+        headers: <String, String>{
+          'Content-Type': 'application/x-www-form-urlencoded',
+          'Key': 'DietaryminderKey',
+        },
+        body: {
+          'email': email,
+          'password': password,
+        });
+
+    return response;
   }
 }

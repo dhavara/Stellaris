@@ -1,7 +1,8 @@
 part of '../../pages.dart';
 
 class CalculatePage extends StatefulWidget {
-  const CalculatePage({super.key});
+  final User user;
+  CalculatePage(this.user);
 
   @override
   State<CalculatePage> createState() => _CalculatePageState();

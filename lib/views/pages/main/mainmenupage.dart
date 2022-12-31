@@ -1,7 +1,9 @@
 part of '../pages.dart';
 
 class MainMenuPage extends StatefulWidget {
-  const MainMenuPage({super.key});
+  final User user;
+
+  MainMenuPage(this.user);
 
   @override
   State<MainMenuPage> createState() => _MainMenuPageState();
@@ -10,12 +12,14 @@ class MainMenuPage extends StatefulWidget {
 class _MainMenuPageState extends State<MainMenuPage> {
   int _selectedIndex = 0;
   // ignore: prefer_final_fields
-  static List<Widget> _widgetOptions = <Widget>[
-    const HomePage(),
-    const CalculatePage(),
-    const FoodsPage(),
-    const SchedulePage()
-  ];
+  List<Widget> _widgetOptions(User user) {
+    return <Widget>[
+      HomePage(user),
+      CalculatePage(user),
+      FoodsPage(user),
+      SchedulePage(user)
+    ];
+  }
 
   void _onItemTapped(int index) {
     setState(() {
@@ -30,11 +34,12 @@ class _MainMenuPageState extends State<MainMenuPage> {
 
   @override
   Widget build(BuildContext context) {
+    User user = widget.user;
     return Scaffold(
       body: Stack(
         children: [
           Center(
-            child: _widgetOptions.elementAt(_selectedIndex),
+            child: _widgetOptions(user).elementAt(_selectedIndex),
           ),
         ],
       ),

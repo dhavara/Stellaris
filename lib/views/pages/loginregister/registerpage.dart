@@ -27,13 +27,24 @@ class _RegisterPageState extends State<RegisterPage> {
     super.dispose();
   }
 
-  bool isSuccess = false;
+  late User user;
   void register(String name, String email, String password) async {
-    var getRegisterValidation =
-        await LoginRegisterController.register(name, email, password);
-    setState(() {
-      isSuccess = getRegisterValidation;
+    await LoginRegisterController.register(name, email, password).then((value) {
+      setState(() {
+        user = value;
+      });
     });
+    if (!mounted) return;
+    if (user.id != "0") {
+      // BlocProvider.of<UserCubit>(context).login(user);
+      ToastUi.toastOk('Registered successfully!');
+      Navigator.pushAndRemoveUntil<dynamic>(
+          context,
+          MaterialPageRoute<dynamic>(builder: (context) => MainMenuPage(user)),
+          (route) => false);
+    } else {
+      ToastUi.toastErr(user.name!);
+    }
   }
 
   @override
@@ -207,29 +218,8 @@ class _RegisterPageState extends State<RegisterPage> {
                           backgroundColor: const Color(0XFF91C788)),
                       onPressed: () {
                         if (_registerKey.currentState!.validate()) {
-                          isSuccess
-                              ? LoginRegisterController.navigateToMainMenu(
-                                  context)
-                              : register(
-                                  ctrlName.text, ctrlEmail.text, ctrlPass.text);
-                          showDialog(
-                            context: context,
-                            builder: (context) => AlertDialog(
-                              content:
-                                  const Text('Please fill all the fields!'),
-                              actions: [
-                                TextButton(
-                                    style: TextButton.styleFrom(
-                                        backgroundColor: Colors.white,
-                                        foregroundColor:
-                                            const Color(0XFF91C788)),
-                                    onPressed: () {
-                                      Navigator.pop(context);
-                                    },
-                                    child: const Text('Try Again'))
-                              ],
-                            ),
-                          );
+                          register(
+                              ctrlName.text, ctrlEmail.text, ctrlPass.text);
                         } else {
                           showDialog(
                             context: context,
