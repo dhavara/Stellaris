@@ -137,7 +137,7 @@ class _DetailedFoodCardState extends State<DetailedFoodCard> {
                         context,
                         MaterialPageRoute<dynamic>(
                             builder: (context) => AddSchedulePage(
-                                f.foodId!, servingListFromFood(f))),
+                                f.foodId as String, servingListFromFood(f))),
                       );
                     },
                     child: const Text("Add To Schedule")),

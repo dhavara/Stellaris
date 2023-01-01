@@ -42,19 +42,23 @@ class _CalculatePageState extends State<CalculatePage> {
       });
     });
     if (!mounted) return;
-    ToastUi.toastOk("Form submitted successfully!");
-    Navigator.push<dynamic>(
-        context,
-        MaterialPageRoute<dynamic>(
-            builder: (context) => CalculateResultPage(
-                DateTime.now(), height, weight, age, gender, activity, calorie))).then((value) {
-      setState(() {
-        ctrlHeight.text = "";
-        ctrlWeight.text = "";
-        ctrlAge.text = "";
-        ctrlActivity.text = "";
+    if (createSuccess) {
+      ToastUi.toastOk("Form submitted successfully!");
+      Navigator.push<dynamic>(
+          context,
+          MaterialPageRoute<dynamic>(
+              builder: (context) => CalculateResultPage(DateTime.now(), height,
+                  weight, age, gender, activity, calorie))).then((value) {
+        setState(() {
+          ctrlHeight.text = "";
+          ctrlWeight.text = "";
+          ctrlAge.text = "";
+          ctrlActivity.text = "";
+        });
       });
-    });
+    } else {
+      ToastUi.toastErr("Something went wrong!");
+    }
   }
 
   @override

@@ -4,6 +4,7 @@ import 'package:dietaryminder/auth/auth.dart';
 import 'package:dietaryminder/controller/controller.dart';
 import 'package:dietaryminder/models/models.dart';
 import 'package:dietaryminder/models/stellaris/calculatehistory.dart';
+import 'package:dietaryminder/models/stellaris/schedule.dart';
 import 'package:dietaryminder/models/stellaris/user.dart';
 import 'package:dietaryminder/shared/shared.dart';
 import 'package:dietaryminder/views/widgets/widgets.dart';
