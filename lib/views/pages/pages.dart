@@ -21,6 +21,7 @@ part 'loginregister/loginpage.dart';
 part 'loginregister/registerpage.dart';
 part 'main/mainmenupage.dart';
 part 'main/home/homepage.dart';
+part 'profile/userprofile.dart';
 part 'main/calculate/calculatepage.dart';
 part 'main/calculate/calculateresultpage.dart';
 part 'main/foods/foodspage.dart';
