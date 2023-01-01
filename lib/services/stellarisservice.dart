@@ -48,7 +48,7 @@ class StellarisService {
     return response;
   }
 
-  static Future<http.Response> createCalculationHistory(
+  static Future<http.Response> createCalculateHistory(
       String userId,
       String height,
       String weight,
@@ -73,5 +73,34 @@ class StellarisService {
         });
 
     return response;
+  }
+
+  static Future<List<CalculateHistory>> getCalculateHistoryByUserId(
+      String userId) async {
+    Map<String, String> queryParams = {
+      'user_id': userId,
+    };
+
+    var response = await http.get(
+      Uri.https(Const.stellarisUrl, "/api/CalculateHistory", queryParams),
+      headers: <String, String>{
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'Key': 'DietaryminderKey',
+      },
+    );
+
+    Map<String, dynamic> job = json.decode(response.body);
+    print(job);
+    List<CalculateHistory> result = [];
+    if (response.statusCode == 200 && job['error'] == null) {
+      if (job['calculation'] != null) {
+        result = (job['calculation'] as List)
+            .map((e) => CalculateHistory.fromMap(e))
+            .toList();
+      }
+    }
+    print(result);
+
+    return result;
   }
 }

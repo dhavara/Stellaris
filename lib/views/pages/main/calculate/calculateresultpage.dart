@@ -2,9 +2,10 @@ part of '../../pages.dart';
 
 class CalculateResultPage extends StatefulWidget {
   final String height, weight, age, gender, activity, calories;
+  final DateTime createdAt;
 
-  CalculateResultPage(this.height, this.weight, this.age, this.gender,
-      this.activity, this.calories);
+  CalculateResultPage(this.createdAt, this.height, this.weight, this.age,
+      this.gender, this.activity, this.calories);
 
   @override
   State<CalculateResultPage> createState() => _CalculateResultPageState();
@@ -13,6 +14,7 @@ class CalculateResultPage extends StatefulWidget {
 class _CalculateResultPageState extends State<CalculateResultPage> {
   @override
   Widget build(BuildContext context) {
+    DateTime createdAt = widget.createdAt;
     String height = widget.height;
     String weight = widget.weight;
     String age = widget.age;
@@ -34,7 +36,7 @@ class _CalculateResultPageState extends State<CalculateResultPage> {
             children: [
               const Text('Your Result',
                   style: TextStyle(fontSize: 20, fontWeight: FontWeight.w800)),
-              Text(CalculateController.getDateTime(DateTime.now()),
+              Text(CalculateController.getDateTime(createdAt),
                   style: const TextStyle(
                       fontSize: 14, fontWeight: FontWeight.w400)),
               Container(

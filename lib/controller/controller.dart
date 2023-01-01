@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:dietaryminder/models/models.dart';
+import 'package:dietaryminder/models/stellaris/calculatehistory.dart';
 import 'package:dietaryminder/models/stellaris/user.dart';
 import 'package:dietaryminder/services/services.dart';
 import 'package:dietaryminder/shared/shared.dart';

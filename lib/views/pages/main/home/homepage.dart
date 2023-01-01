@@ -8,10 +8,27 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  List<CalculateHistory> historyList = [];
+
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<UserCubit, User?>(
       builder: (context, state) {
+        void getHistory() async {
+          var getHistoryResults =
+              await CalculateController.getCalculateHistoryByUserId(
+                  state?.id! as String);
+          setState(() {
+            historyList = getHistoryResults;
+          });
+        }
+
+        if (state != null) {
+          if (historyList.isEmpty) {
+            getHistory();
+          }
+        }
+
         return Scaffold(
             resizeToAvoidBottomInset: false,
             appBar: AppBar(
@@ -72,6 +89,28 @@ class _HomePageState extends State<HomePage> {
                           style: TextStyle(
                               fontSize: 16, fontWeight: FontWeight.w600),
                           textAlign: TextAlign.left),
+                      const SizedBox(height: 24),
+                      const Text("Calculate History",
+                          style: TextStyle(
+                              fontSize: 16, fontWeight: FontWeight.w600),
+                          textAlign: TextAlign.left),
+                      const SizedBox(height: 24),
+                      Container(
+                          height: MediaQuery.of(context).size.height * 0.3,
+                          width: double.infinity,
+                          child: historyList.isEmpty
+                              ? LoadingUi.loading()
+                              : ListView.builder(
+                                  itemCount: historyList.length,
+                                  itemBuilder: (context, index) {
+                                    return LazyLoadingList(
+                                        initialSizeOfItems: 10,
+                                        loadMore: () {},
+                                        index: index,
+                                        hasMore: true,
+                                        child: HistoryCard(historyList[index]));
+                                  },
+                                )),
                     ],
                   ),
                 )));

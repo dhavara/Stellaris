@@ -47,7 +47,7 @@ class _CalculatePageState extends State<CalculatePage> {
         context,
         MaterialPageRoute<dynamic>(
             builder: (context) => CalculateResultPage(
-                height, weight, age, gender, activity, calorie))).then((value) {
+                DateTime.now(), height, weight, age, gender, activity, calorie))).then((value) {
       setState(() {
         ctrlHeight.text = "";
         ctrlWeight.text = "";

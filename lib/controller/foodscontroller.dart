@@ -1,6 +1,7 @@
 part of 'controller.dart';
 
 class FoodsController {
+  
   // Handling API Request from AccessTokenService
   static Future<AccessTokenResponse> reqAccessToken(
       String clientId, String clientSecret) async {

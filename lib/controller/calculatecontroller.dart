@@ -19,11 +19,10 @@ class CalculateController {
   static String getDateTime(DateTime dateTime) {
     String dateTimeString = "";
 
-    DateTime now = DateTime.now();
-    String nowString = now.toString();
-    var nowSplitted = nowString.split(' ');
-    var date = nowSplitted[0].split('-');
-    var time = nowSplitted[1].split(':');
+    String dtString = dateTime.toString();
+    var dtSplitted = dtString.split(' ');
+    var date = dtSplitted[0].split('-');
+    var time = dtSplitted[1].split(':');
     print(date);
     print(time);
 
@@ -51,6 +50,9 @@ class CalculateController {
         }
       }
     }
+    if (dateTimeString.contains('-')) {
+      dateTimeString = dateTimeString.replaceAll('-', '');
+    }
     return dateTimeString;
   }
 
@@ -62,16 +64,23 @@ class CalculateController {
       String gender,
       String activity,
       String calorie) async {
-    var response = await StellarisService.createCalculationHistory(
+    var response = await StellarisService.createCalculateHistory(
         userId, height, weight, age, gender, activity, calorie);
 
     var job = json.decode(response.body);
-    print(job);
 
     if (response.statusCode == 201 && job['message'] != null) {
       return true;
     } else {
       return false;
     }
+  }
+
+  static Future<dynamic> getCalculateHistoryByUserId(String userId) async {
+    List<CalculateHistory> chList = [];
+    await StellarisService.getCalculateHistoryByUserId(userId).then((value) {
+      chList = value;
+    });
+    return chList;
   }
 }
