@@ -74,14 +74,26 @@ class _HomePageState extends State<HomePage> {
                                     title: Padding(
                                       padding:
                                           const EdgeInsets.fromLTRB(0, 8, 0, 8),
-                                      child: Text("${state?.name}",
+                                      child: Text("Hallo " + "${state?.name}",
                                           textAlign: TextAlign.center,
                                           style: const TextStyle(
                                               fontWeight: FontWeight.bold,
                                               fontSize: 20,
                                               color: Colors.black)),
                                     ),
-                                  )
+                                  ),
+                                  TextButton(
+                                      onPressed: () {
+                                        Navigator.push<dynamic>(
+                                            context,
+                                            MaterialPageRoute<dynamic>(
+                                                builder: (context) =>
+                                                    UserProfile()));
+                                      },
+                                      child: const Text("Profile",
+                                          style: TextStyle(
+                                            color: Color(0XFF91C788),
+                                          )))
                                 ],
                               ))),
                       const SizedBox(height: 24),
