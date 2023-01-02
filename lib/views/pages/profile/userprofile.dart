@@ -31,6 +31,59 @@ class _UserProfileState extends State<UserProfile> {
         ],
         backgroundColor: const Color(0xFF91C788),
       ),
+      body: Container(
+        width: double.infinity,
+        height: double.infinity,
+        padding: const EdgeInsets.fromLTRB(24, 16, 24, 16),
+        child: Column(
+          children: [
+            Container(
+                width: double.infinity,
+                child: Card(
+                    elevation: 10,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20.0),
+                    ),
+                    color: Colors.white,
+                    margin: const EdgeInsets.fromLTRB(16, 8, 16, 8),
+                    child: Column(
+                      children: [
+                        ListTile(
+                          title: Padding(
+                            padding: const EdgeInsets.fromLTRB(0, 8, 0, 8),
+                            child: Text("Hallo ",
+                                textAlign: TextAlign.center,
+                                style: const TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 20,
+                                    color: Colors.black)),
+                          ),
+                        ),
+                        TextButton(
+                            onPressed: () {
+                              Navigator.push<dynamic>(
+                                  context,
+                                  MaterialPageRoute<dynamic>(
+                                      builder: (context) => UserProfile()));
+                            },
+                            child: const Text("Profile",
+                                style: TextStyle(
+                                  color: Color(0XFF91C788),
+                                )))
+                      ],
+                    ))),
+            const SizedBox(height: 24),
+            const Text("Recommended Food",
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+                textAlign: TextAlign.left),
+            const SizedBox(height: 24),
+            const Text("Calculate History",
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+                textAlign: TextAlign.left),
+            const SizedBox(height: 24),
+          ],
+        ),
+      ),
     );
   }
 }
