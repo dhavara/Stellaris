@@ -32,6 +32,7 @@ class _HomePageState extends State<HomePage> {
         return Scaffold(
             resizeToAvoidBottomInset: false,
             appBar: AppBar(
+              // Home Section
               title: const Text('Home'),
               backgroundColor: const Color(0xFF91C788),
             ),
@@ -57,12 +58,7 @@ class _HomePageState extends State<HomePage> {
                                     title: Padding(
                                       padding:
                                           const EdgeInsets.fromLTRB(0, 8, 0, 8),
-                                      child: Text("Hello, ${state?.name}",
-                                          textAlign: TextAlign.center,
-                                          style: const TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: 20,
-                                              color: Colors.black)),
+                                      child: Text("Hello, ${state?.name}"
                                     ),
                                   ),
                                   TextButton(
@@ -73,18 +69,22 @@ class _HomePageState extends State<HomePage> {
                                                 builder: (context) =>
                                                     UserProfile()));
                                       },
+                                      // Profile Section
                                       child: const Text("Profile",
                                           style: TextStyle(
+                                            fontWeight: FontWeight.bold,
                                             color: Color(0XFF91C788),
                                           )))
                                 ],
                               ))),
                       const SizedBox(height: 24),
+                      // Recommended Food Section
                       const Text("Recommended Food",
                           style: TextStyle(
                               fontSize: 16, fontWeight: FontWeight.w600),
                           textAlign: TextAlign.left),
                       const SizedBox(height: 24),
+                      // Calculate History Section
                       const Text("Calculate History",
                           style: TextStyle(
                               fontSize: 16, fontWeight: FontWeight.w600),
