@@ -1,15 +1,20 @@
-// part of '../pages.dart';
+part of '../pages.dart';
 
-// class editprofile extends StatefulWidget {
-//   const editprofile({super.key});
+class editprofile extends StatefulWidget {
+  const editprofile({super.key});
 
-//   @override
-//   State<editprofile> createState() => _editprofileState();
-// }
+  @override
+  State<editprofile> createState() => _editprofileState();
+}
 
-// class _editprofileState extends State<editprofile> {
-//   @override
-//   Widget build(BuildContext context) {
-//     return Container();
-//   }
-// }
+class _editprofileState extends State<editprofile> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Home'),
+        backgroundColor: const Color(0xFF91C788),
+      ),
+    );
+  }
+}
