@@ -33,7 +33,7 @@ class _HomePageState extends State<HomePage> {
             resizeToAvoidBottomInset: false,
             appBar: AppBar(
               // Home Section
-              title: const Text('Home'),
+              title: const Text('HOME'),
               backgroundColor: const Color(0xFF91C788),
             ),
             body: Container(

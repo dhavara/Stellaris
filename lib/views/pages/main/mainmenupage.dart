@@ -52,7 +52,7 @@ class _MainMenuPageState extends State<MainMenuPage> {
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.food_bank),
-            label: "Foods",
+            label: "Foodies",
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.calendar_month),

@@ -44,7 +44,7 @@ class _CalculateResultPageState extends State<CalculateResultPage> {
                 child: Card(
                   elevation: 10,
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20.0),
+                    borderRadius: BorderRadius.circular(25.0),
                   ),
                   margin: const EdgeInsets.fromLTRB(0, 8, 0, 8),
                   child: Padding(
@@ -117,7 +117,7 @@ class _CalculateResultPageState extends State<CalculateResultPage> {
                   onPressed: () {
                     Navigator.pop(context, true);
                   },
-                  child: const Text("Okay"),
+                  child: const Text("Your Result :)"),
                 ),
               )
             ],

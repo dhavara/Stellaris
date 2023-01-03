@@ -43,7 +43,7 @@ class _CalculatePageState extends State<CalculatePage> {
     });
     if (!mounted) return;
     if (createSuccess) {
-      ToastUi.toastOk("Form submitted successfully!");
+      ToastUi.toastOk("Form Submitted Successfully!");
       Navigator.push<dynamic>(
           context,
           MaterialPageRoute<dynamic>(
@@ -85,7 +85,7 @@ class _CalculatePageState extends State<CalculatePage> {
                           children: <Widget>[
                             const Text("Calculate",
                                 style: TextStyle(
-                                    fontWeight: FontWeight.w400, fontSize: 24)),
+                                    fontWeight: FontWeight.bold, fontSize: 24)),
                             const Text(
                               "Your amount of calories needed per day",
                               style:
@@ -358,7 +358,8 @@ class _CalculatePageState extends State<CalculatePage> {
                                                 calories.toString());
                                           }
                                         },
-                                        child: const Text("Calculate!"),
+                                        // Generate Calculate Calories
+                                        child: const Text("CALCULATE CALORIES"),
                                       ),
                                     )
                                   ],
