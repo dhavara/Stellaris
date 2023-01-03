@@ -77,6 +77,7 @@ class _UserProfileState extends State<UserProfile> {
                 style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
                 textAlign: TextAlign.left),
             const SizedBox(height: 24),
+            // Calculate History
             const Text("Calculate History",
                 style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
                 textAlign: TextAlign.left),
