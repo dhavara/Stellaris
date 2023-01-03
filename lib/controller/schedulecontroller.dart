@@ -26,6 +26,14 @@ class ScheduleController {
     return scheduleList;
   }
 
+  static Future<dynamic> getScheduleById(String id) async {
+    List<Schedule> scheduleList = [];
+    await StellarisService.getScheduleById(id).then((value) {
+      scheduleList = value;
+    });
+    return scheduleList;
+  }
+
   static Future<bool> createScheduleItem(String scheduleId, String time,
       String foodId, String measurement, String quantity) async {
     print('Schedule ID: $scheduleId');

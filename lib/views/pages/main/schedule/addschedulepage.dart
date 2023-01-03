@@ -16,10 +16,13 @@ class _AddSchedulePageState extends State<AddSchedulePage> {
   final ctrlTime = TextEditingController();
   final ctrlQuantity = TextEditingController();
 
+  String selectedMeasurement = "";
+
   @override
   void initState() {
     super.initState();
     ctrlId.text = widget.foodId;
+    selectedMeasurement = widget.servings[0].measurementDescription!;
   }
 
   @override
@@ -33,7 +36,6 @@ class _AddSchedulePageState extends State<AddSchedulePage> {
 
   List<String> getAllMeasurements(List<Serving> s) {
     List<String> measurementList = [];
-
     for (int i = 0; i < s.length; i++) {
       measurementList.add(s[i].measurementDescription!);
     }
@@ -44,7 +46,7 @@ class _AddSchedulePageState extends State<AddSchedulePage> {
   String scheduleId = "";
   bool createSuccess = false;
   void createSchedule(String userId, String date, String time, String foodId,
-      String measurement, String quantity) async {
+      String quantity) async {
     await ScheduleController.createSchedule(userId, date).then((value) {
       setState(() {
         scheduleId = value;
@@ -52,7 +54,7 @@ class _AddSchedulePageState extends State<AddSchedulePage> {
     });
     if (scheduleId == "") return;
     await ScheduleController.createScheduleItem(
-            scheduleId, time, foodId, measurement, quantity)
+            scheduleId, time, foodId, selectedMeasurement, quantity)
         .then((value) {
       setState(() {
         createSuccess = value;
@@ -71,7 +73,6 @@ class _AddSchedulePageState extends State<AddSchedulePage> {
   Widget build(BuildContext context) {
     String foodId = widget.foodId;
     List<Serving> servings = widget.servings;
-    String selectedMeasurement = widget.servings[0].measurementDescription!;
 
     print(servings);
 
@@ -394,6 +395,11 @@ class _AddSchedulePageState extends State<AddSchedulePage> {
                                           setState(() {
                                             selectedMeasurement = newValue!;
                                           });
+                                        },
+                                        onSaved: (String? newValue) {
+                                          setState(() {
+                                            selectedMeasurement = newValue!;
+                                          });
                                         }),
 
                                     //Code for Form (Activity)
@@ -465,7 +471,6 @@ class _AddSchedulePageState extends State<AddSchedulePage> {
                                                 ctrlDate.text,
                                                 ctrlTime.text,
                                                 ctrlId.text,
-                                                selectedMeasurement,
                                                 ctrlQuantity.text);
                                           }
                                         },

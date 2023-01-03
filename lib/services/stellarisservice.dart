@@ -147,6 +147,33 @@ class StellarisService {
     return result;
   }
 
+  static Future<List<Schedule>> getScheduleById(String id) async {
+    Map<String, String> queryParams = {
+      'id': id,
+    };
+
+    var response = await http.get(
+      Uri.https(Const.stellarisUrl, "/api/Schedule", queryParams),
+      headers: <String, String>{
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'Key': 'DietaryminderKey',
+      },
+    );
+
+    Map<String, dynamic> job = json.decode(response.body);
+    print(job);
+    List<Schedule> result = [];
+    if (response.statusCode == 200 && job['error'] == null) {
+      if (job['schedule'] != null) {
+        result =
+            (job['schedule'] as List).map((e) => Schedule.fromMap(e)).toList();
+      }
+    }
+    print(result);
+
+    return result;
+  }
+
   static Future<http.Response> createScheduleItem(String scheduleId,
       String time, String foodId, String measurement, String quantity) async {
     var response = await http.post(
@@ -173,7 +200,7 @@ class StellarisService {
     };
 
     var response = await http.get(
-      Uri.https(Const.stellarisUrl, "/api/Schedule", queryParams),
+      Uri.https(Const.stellarisUrl, "/api/ScheduleItem", queryParams),
       headers: <String, String>{
         'Content-Type': 'application/x-www-form-urlencoded',
         'Key': 'DietaryminderKey',

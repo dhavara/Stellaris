@@ -57,7 +57,7 @@ class _HomePageState extends State<HomePage> {
                                     title: Padding(
                                       padding:
                                           const EdgeInsets.fromLTRB(0, 8, 0, 8),
-                                      child: Text("Hallo " + "${state?.name}",
+                                      child: Text("Hello, ${state?.name}",
                                           textAlign: TextAlign.center,
                                           style: const TextStyle(
                                               fontWeight: FontWeight.bold,

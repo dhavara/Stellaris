@@ -18,10 +18,11 @@ class _FoodDetailPageState extends State<FoodDetailPage> {
   List<Food> foodList = [];
   // Handling functions from FoodsController
   void getFood() async {
-    var getFoodResults = await FoodsController.getFoodData(widget.foodId!);
-    setState(() {
-      foodList = getFoodResults[0];
-      isLoading = getFoodResults[1];
+    await FoodsController.getFoodData(widget.foodId!).then((value) {
+      setState(() {
+        foodList = value[0];
+        isLoading = value[1];
+      });
     });
   }
 

@@ -24,12 +24,16 @@ class _SchedulePageState extends State<SchedulePage> {
         body: BlocBuilder<UserCubit, User?>(
           builder: (context, state) {
             void getSchedule() async {
-              var getScheduleResult =
-                  await ScheduleController.getScheduleByUserId(
-                      state?.id! as String);
-              setState(() {
-                scheduleList = getScheduleResult;
-                isLoading = false;
+              await ScheduleController.getScheduleByUserId(state?.id! as String)
+                  .then((value) {
+                setState(() {
+                  scheduleList = value;
+                  isLoading = false;
+
+                  scheduleList.sort((a, b) => a.scheduleDate!
+                      .toString()
+                      .compareTo(b.scheduleDate!.toString()));
+                });
               });
               print(scheduleList);
             }

@@ -32,7 +32,7 @@ class _HistoryCardState extends State<HistoryCard> {
                       style:
                           TextStyle(fontSize: 16, fontWeight: FontWeight.w600)),
                   Text(
-                    "${ch.calorie}",
+                    "${ch.calorie}cal",
                     style: const TextStyle(fontSize: 12),
                   ),
                   const Text('Date Time',

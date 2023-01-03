@@ -99,7 +99,7 @@ class _CalculateResultPageState extends State<CalculateResultPage> {
                         const Text('Calories',
                             style: TextStyle(
                                 fontSize: 16, fontWeight: FontWeight.w800)),
-                        Text('${calories.toString()}kcal',
+                        Text('${calories.toString()}cal',
                             style: const TextStyle(
                                 fontSize: 16, fontWeight: FontWeight.w400)),
                       ],

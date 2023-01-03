@@ -10,6 +10,23 @@ class ScheduleButton extends StatefulWidget {
 }
 
 class _ScheduleButtonState extends State<ScheduleButton> {
+  List<Schedule> scheduleList = [];
+  void getSchedule() async {
+    await ScheduleController.getScheduleById(widget.schedule.id!).then((value) {
+      setState(() {
+        scheduleList = value;
+      });
+    });
+    print(scheduleList);
+    if (!mounted) return;
+    if (scheduleList.isNotEmpty) {
+      Navigator.push<dynamic>(
+          context,
+          MaterialPageRoute<dynamic>(
+              builder: (context) => ScheduleDetailPage(widget.schedule)));
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     Schedule s = widget.schedule;
@@ -17,10 +34,14 @@ class _ScheduleButtonState extends State<ScheduleButton> {
       width: double.infinity,
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
-            shape: const StadiumBorder(),
-            backgroundColor: const Color(0XFF91C788)),
-        onPressed: () {},
-        child: Text(s.scheduleDate!),
+            shape: const StadiumBorder(), backgroundColor: Colors.white),
+        onPressed: () async {
+          getSchedule();
+        },
+        child: Text(
+          s.scheduleDate!,
+          style: const TextStyle(color: Colors.black),
+        ),
       ),
     );
   }

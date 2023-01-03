@@ -20,11 +20,12 @@ class _FoodsPageState extends State<FoodsPage> {
   List<SearchFood> foodsList = [];
   // Handling functions from FoodsController
   void searchFood() async {
-    var searchFoodResults =
-        await FoodsController.getSearchData(queryData, currentPage, foodsList);
-    setState(() {
-      foodsList = searchFoodResults[0];
-      isLoading = searchFoodResults[1];
+    await FoodsController.getSearchData(queryData, currentPage, foodsList)
+        .then((value) {
+      setState(() {
+        foodsList = value[0];
+        isLoading = value[1];
+      });
     });
   }
 
