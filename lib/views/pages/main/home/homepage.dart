@@ -58,7 +58,12 @@ class _HomePageState extends State<HomePage> {
                                     title: Padding(
                                       padding:
                                           const EdgeInsets.fromLTRB(0, 8, 0, 8),
-                                      child: Text("Hello, ${state?.name}"
+                                      child: Text("Hello, ${state?.name}",
+                                          textAlign: TextAlign.center,
+                                          style: const TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 30,
+                                              color: Colors.black)),
                                     ),
                                   ),
                                   TextButton(
