@@ -73,6 +73,7 @@ class _UserProfileState extends State<UserProfile> {
                       ],
                     ))),
             const SizedBox(height: 24),
+            // Recommended Food
             const Text("Recommended Food",
                 style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
                 textAlign: TextAlign.left),
