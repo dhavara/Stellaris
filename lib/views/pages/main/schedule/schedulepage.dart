@@ -54,7 +54,7 @@ class _SchedulePageState extends State<SchedulePage> {
                     SingleChildScrollView(
                         child: Container(
                             width: double.infinity,
-                            height: MediaQuery.of(context).size.height * 0.785,
+                            height: MediaQuery.of(context).size.height * 0.75,
                             child: scheduleList.isEmpty
                                 ? LoadingUi.loading()
                                 : ListView.builder(

@@ -58,7 +58,7 @@ class _ScheduleDetailPageState extends State<ScheduleDetailPage> {
                     ),
                     Container(
                       width: double.infinity,
-                      height: MediaQuery.of(context).size.height * 0.83,
+                      height: MediaQuery.of(context).size.height * 0.8,
                       child: itemsList.isEmpty
                           ? const Align(
                               alignment: Alignment.center,
