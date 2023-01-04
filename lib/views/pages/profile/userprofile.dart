@@ -73,18 +73,18 @@ class _UserProfileState extends State<UserProfile> {
                                       color: Colors.black45)),
                             ),
                           ),
-                        //   TextButton(
-                        //       onPressed: () {
-                        //         Navigator.push<dynamic>(
-                        //             context,
-                        //             MaterialPageRoute<dynamic>(
-                        //                 builder: (context) => editprofile()));
-                        //       },
-                        //       child: const Text("Profile",
-                        //           style: TextStyle(
-                        //             color: Color(0XFF91C788),
-                        //           )))
-                        // ],
+                          // TextButton(
+                          //     onPressed: () {
+                          //       Navigator.push<dynamic>(
+                          //           context,
+                          //           MaterialPageRoute<dynamic>(
+                          //               builder: (context) => editprofile()));
+                          //     },
+                          //     child: const Text("Profile",
+                          //         style: TextStyle(
+                          //           color: Color(0XFF91C788),
+                          //         )))
+                        ],
                       ))),
             ],
           ),
