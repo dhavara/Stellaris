@@ -15,3 +15,4 @@ part 'calculatecontroller.dart';
 part 'schedulecontroller.dart';
 part 'foodscontroller.dart';
 part 'loginregistercontroller.dart';
+part 'profilecontroller.dart';

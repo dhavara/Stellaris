@@ -48,6 +48,23 @@ class StellarisService {
     return response;
   }
 
+  static Future<http.Response> edit(
+      String id, String name, String password) async {
+    var response = await http.post(
+        Uri.https(Const.stellarisUrl, "/api/user/edit"),
+        headers: <String, String>{
+          'Content-Type': 'application/x-www-form-urlencoded',
+          'Key': 'DietaryminderKey',
+        },
+        body: {
+          'id': id,
+          'name': name,
+          'password': password,
+        });
+
+    return response;
+  }
+
   static Future<http.Response> createCalculateHistory(
       String userId,
       String height,

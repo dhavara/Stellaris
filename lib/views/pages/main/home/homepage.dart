@@ -15,11 +15,12 @@ class _HomePageState extends State<HomePage> {
     return BlocBuilder<UserCubit, User?>(
       builder: (context, state) {
         void getHistory() async {
-          var getHistoryResults =
-              await CalculateController.getCalculateHistoryByUserId(
-                  state?.id! as String);
-          setState(() {
-            historyList = getHistoryResults;
+          await CalculateController.getCalculateHistoryByUserId(
+                  state?.id! as String)
+              .then((value) {
+            setState(() {
+              historyList = value;
+            });
           });
         }
 

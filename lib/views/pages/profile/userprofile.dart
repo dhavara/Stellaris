@@ -51,39 +51,28 @@ class _UserProfileState extends State<UserProfile> {
                       margin: const EdgeInsets.fromLTRB(16, 8, 16, 8),
                       child: Column(
                         children: [
-                          ListTile(
-                            title: Padding(
-                              padding: const EdgeInsets.fromLTRB(0, 8, 0, 8),
-                              child: Text("${state?.name}",
-                                  textAlign: TextAlign.center,
-                                  style: const TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 20,
-                                      color: Colors.black)),
-                            ),
+                          const SizedBox(height: 8),
+                          Text(
+                            "${state?.name}",
+                            style: const TextStyle(
+                                fontSize: 20, fontWeight: FontWeight.bold),
                           ),
-                          ListTile(
-                            title: Padding(
-                              padding: const EdgeInsets.fromLTRB(0, 8, 0, 8),
-                              child: Text("${state?.email}",
-                                  textAlign: TextAlign.center,
-                                  style: const TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 14,
-                                      color: Colors.black45)),
-                            ),
+                          const SizedBox(height: 8),
+                          Text(
+                            "${state?.email}",
+                            style: const TextStyle(fontSize: 15),
                           ),
-                          // TextButton(
-                          //     onPressed: () {
-                          //       Navigator.push<dynamic>(
-                          //           context,
-                          //           MaterialPageRoute<dynamic>(
-                          //               builder: (context) => editprofile()));
-                          //     },
-                          //     child: const Text("Profile",
-                          //         style: TextStyle(
-                          //           color: Color(0XFF91C788),
-                          //         )))
+                          TextButton(
+                              onPressed: () {
+                                Navigator.push<dynamic>(
+                                    context,
+                                    MaterialPageRoute<dynamic>(
+                                        builder: (context) => editprofile()));
+                              },
+                              child: const Text("Edit Profile",
+                                  style: TextStyle(
+                                    color: Color(0XFF91C788),
+                                  )))
                         ],
                       ))),
             ],
