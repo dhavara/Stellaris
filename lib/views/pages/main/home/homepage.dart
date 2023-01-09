@@ -97,7 +97,7 @@ class _HomePageState extends State<HomePage> {
                           textAlign: TextAlign.left),
                       const SizedBox(height: 24),
                       Container(
-                          height: MediaQuery.of(context).size.height * 0.3,
+                          height: MediaQuery.of(context).size.height * 0.5,
                           width: double.infinity,
                           child: historyList.isEmpty
                               ? LoadingUi.loading()
